@@ -51,7 +51,7 @@ Window::~Window()
 {
 }
 
-const HWND &Window::getWindowHandle() const
+const HWND Window::getWindowHandle() const
 {
 	return hWnd;
 }

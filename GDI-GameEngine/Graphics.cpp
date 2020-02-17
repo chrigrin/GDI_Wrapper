@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Graphics.hpp"
 
-Graphics::Graphics(const HWND &hWnd)
+Graphics::Graphics(const HWND hWnd)
 	:
 	hWnd(hWnd)
 {

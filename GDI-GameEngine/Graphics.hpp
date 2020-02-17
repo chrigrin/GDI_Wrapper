@@ -4,7 +4,7 @@
 class Graphics
 {
 public:
-	Graphics(const HWND &hWnd);
+	Graphics(const HWND hWnd);
 	~Graphics();
 
 	void clear();

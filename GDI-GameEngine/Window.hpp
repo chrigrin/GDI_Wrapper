@@ -23,7 +23,7 @@ public:
 	Window();
 	~Window();
 
-	const HWND &getWindowHandle() const;
+	const HWND getWindowHandle() const;
 
 private:
 	static LRESULT CALLBACK handleMessageSetup(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
