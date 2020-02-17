@@ -58,6 +58,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			gfx.draw(otherRect);
 			gfx.display();
 
+			std::wstring wstr = std::to_wstring(dt);
+			SetWindowText(someWindow.getWindowHandle(), wstr.c_str());
 			rect.move(int(1000 * dt), 0);
 		}
     }
