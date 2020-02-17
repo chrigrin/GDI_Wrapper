@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Window.hpp"
 
+// Initialize the windowclass at compile time to make the compiler happy
 Window::WindowClass Window::WindowClass::wndClass;
 
 const wchar_t * Window::WindowClass::getName()
@@ -15,8 +16,10 @@ HINSTANCE Window::WindowClass::getInstance()
 
 Window::WindowClass::WindowClass()
 	:
+	// Set the HINSTANCE to the instance of the program
 	hInst(GetModuleHandle(nullptr))
 {
+	// Initialize a windowclass and set all members empty
 	WNDCLASSEX wc = { 0 };
 	wc.cbSize = sizeof(wc);
 	wc.cbClsExtra = 0;
@@ -31,19 +34,23 @@ Window::WindowClass::WindowClass()
 	wc.lpszMenuName = nullptr;
 	wc.style = CS_HREDRAW | CS_VREDRAW;
 
+	// Register the windowclass
 	RegisterClassEx(&wc);
 }
 
 Window::WindowClass::~WindowClass()
 {
+	// Unregister the window class
 	UnregisterClass(wndClassName, hInst);
 }
 
 Window::Window()
 {
+	// Create a window and store a pointer to this class in the lpParam
 	hWnd = CreateWindow(WindowClass::getName(), L"Desktop", WS_MINIMIZEBOX | WS_SYSMENU,
 		CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, WindowClass::getInstance(), this);
 
+	// Show the window
 	ShowWindow(hWnd, SW_SHOWDEFAULT);
 }
 
@@ -60,18 +67,25 @@ LRESULT Window::handleMessageSetup(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lP
 {
 	if (msg == WM_NCCREATE)
 	{
+		// Create a pointer to the createstruct in WM_NCCREATE's LPARAM
 		const CREATESTRUCT* const pCreate = reinterpret_cast<CREATESTRUCT*>(lParam);
+		// Create a pointer to the window from the pCreate's lpParams
 		Window *pWnd = reinterpret_cast<Window*>(pCreate->lpCreateParams);
+		// Set the userdata of the window to a pointer of the window
 		SetWindowLongPtr(hWnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(pWnd));
+		// Set the window procedure to the handleMessageThunk
 		SetWindowLongPtr(hWnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(&Window::handleMessageThunk));
-		pWnd->handleMessage(hWnd, msg, wParam, lParam);
+		// Call the messageHandler
+		return pWnd->handleMessage(hWnd, msg, wParam, lParam);
 	}
 	return DefWindowProc(hWnd, msg, wParam, lParam);
 }
 
 LRESULT Window::handleMessageThunk(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+	// Retrieve a pointer to the window
 	Window* const pWnd = reinterpret_cast<Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
+	// Call the messageHandler
 	return pWnd->handleMessage(hWnd, msg, wParam, lParam);
 }
 
@@ -94,13 +108,6 @@ LRESULT Window::handleMessage(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	case WM_PAINT:
 	{
 		BeginPaint(hWnd, &ps);
-
-		//BitBlt(dcBuffer, 0, 0, clientRect.right, clientRect.bottom, nullptr, 0, 0, BLACKNESS);
-		//BitBlt(hDC, 0, 0, clientRect.right, clientRect.bottom, nullptr, 0, 0, BLACKNESS);
-
-		//FillRect(dcBuffer, &someRect, CreateSolidBrush(RGB(0, 255, 0)));
-
-		//BitBlt(ps.hdc, 0, 0, clientRect.right, clientRect.bottom, dcBuffer, 0, 0, SRCCOPY);
 
 		EndPaint(hWnd, &ps);
 	}
