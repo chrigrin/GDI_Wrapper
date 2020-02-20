@@ -56,6 +56,7 @@ Window::Window()
 
 Window::~Window()
 {
+	DestroyWindow(m_hWnd);
 }
 
 const HWND Window::getWindowHandle() const
@@ -107,9 +108,9 @@ LRESULT Window::handleMessage(HWND m_hWnd, UINT msg, WPARAM wParam, LPARAM lPara
 		break;
 	case WM_PAINT:
 	{
-		BeginPaint(m_hWnd, &m_ps);
+		BeginPaint(m_hWnd, &ps);
 
-		EndPaint(m_hWnd, &m_ps);
+		EndPaint(m_hWnd, &ps);
 	}
 	break;
 	case WM_KEYDOWN:
