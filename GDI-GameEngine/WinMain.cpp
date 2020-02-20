@@ -30,9 +30,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	RectangleShape rect, otherRect;
 
-	rect.setPosition(0, 0);
+	rect.setPosition(100, 100);
 	rect.setSize(100, 100);
 	rect.setFillColor(0, 255, 0);
+	rect.setOutlineThickness(1);
+	rect.setOutlineColor(0, 0, 255);
 
 	otherRect.setPosition(200, 200);
 	otherRect.setSize(200, 200);
@@ -60,7 +62,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 			std::wstring wstr = std::to_wstring(dt);
 			SetWindowText(someWindow.getWindowHandle(), wstr.c_str());
-			rect.move(int(1000 * dt), 0);
+			//rect.move(int(1000 * dt), 0);
 		}
     }
 

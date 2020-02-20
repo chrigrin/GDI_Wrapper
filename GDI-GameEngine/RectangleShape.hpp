@@ -6,13 +6,14 @@ class RectangleShape : public Shape
 public:
 	RectangleShape();
 	RectangleShape(int width, int height);
-	RectangleShape(int x, int y, int m_width, int m_height);
+	RectangleShape(int x, int y, int width, int height);
 	RectangleShape(std::pair<int, int> pos, std::pair<int, int> size);
 	RectangleShape(RECT &rect);
 	virtual ~RectangleShape();
 
 	void setFillColor(unsigned char r, unsigned char g, unsigned char b) override;
 	void setOutlineColor(unsigned char r, unsigned char g, unsigned char b) override;
+	void setOutlineThickness(int outlineThickness);
 
 	void setPosition(int x, int y) override;
 	void setPosition(std::pair<int, int> pos) override;
@@ -32,5 +33,6 @@ public:
 private:
 	int m_x, m_y;
 	int m_width, m_height;
+	int m_outlineThickness;
 	COLORREF m_fillColor, m_outlineColor;
 };

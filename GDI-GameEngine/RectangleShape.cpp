@@ -2,6 +2,8 @@
 #include "RectangleShape.hpp"
 
 RectangleShape::RectangleShape()
+	:
+	m_outlineThickness(0)
 {
 	m_fillColor = RGB(255, 255, 255);
 	m_outlineColor = RGB(0, 0, 0);
@@ -12,19 +14,15 @@ RectangleShape::RectangleShape(int width, int height)
 	m_width(width),
 	m_height(height)
 {
-	m_fillColor = RGB(255, 255, 255);
-	m_outlineColor = RGB(0, 0, 0);
+	RectangleShape();
 }
 
-RectangleShape::RectangleShape(int x, int y, int m_width, int m_height)
+RectangleShape::RectangleShape(int x, int y, int width, int height)
 	:
-	m_x(m_x),
-	m_y(m_y),
-	m_width(m_width),
-	m_height(m_height)
+	m_x(x),
+	m_y(y)
 {
-	m_fillColor = RGB(255, 255, 255);
-	m_outlineColor = RGB(0, 0, 0);
+	RectangleShape(width, height);
 }
 
 RectangleShape::RectangleShape(std::pair<int, int> pos, std::pair<int, int> size)
@@ -53,6 +51,11 @@ void RectangleShape::setFillColor(unsigned char r, unsigned char g, unsigned cha
 void RectangleShape::setOutlineColor(unsigned char r, unsigned char g, unsigned char b)
 {
 	m_outlineColor = RGB(r, g, b);
+}
+
+void RectangleShape::setOutlineThickness(int outlineThickness)
+{
+	m_outlineThickness = outlineThickness;
 }
 
 void RectangleShape::setPosition(int x, int y)
@@ -120,19 +123,72 @@ RECT RectangleShape::getRect()
 
 void RectangleShape::draw(HDC &hDC)
 {
+	RECT rect = getRect();
+
 	COLORREF returnPen, returnBrush;
 
-	returnPen = SetDCPenColor(hDC, m_outlineColor);
+	// Set pen color (outer points of the rectangle)
+	returnPen = SetDCPenColor(hDC, RGB(255, 0, 0));
+	// Set brush color (fill color of the rectangle)
 	returnBrush = SetDCBrushColor(hDC, m_fillColor);
 
+	// Error checks
 	if (returnPen == CLR_INVALID)
 		MessageBox(nullptr, L"Could not set pen color", L"Error", MB_ICONERROR);
 	if (returnBrush == CLR_INVALID)
 		MessageBox(nullptr, L"Could not set brush color", L"Error", MB_ICONERROR);
 
-	int width, height;
-	width = m_x + m_width;
-	height = m_y + m_height;
+	// Draw the rectangle before the outline (makes negative outlines possible)
+	Rectangle(hDC, rect.left, rect.top, rect.right, rect.bottom);
 
-	Rectangle(hDC, m_x, m_y, width, height);
+	// If an outline is specified create a custom outline for the rectangle
+	if (m_outlineThickness != 0)
+	{
+		RECT outlineRect = getRect();
+		int offset;
+		if (m_outlineThickness == int(1 || -1))
+		{
+			// (1 / 2) on an int would be 0, therefore set the offset
+			// to the outlineThickness
+			offset = m_outlineThickness;
+			outlineRect.left -= offset;
+			outlineRect.top -= offset;
+		}
+		else
+		{
+			offset = m_outlineThickness / 2;
+			outlineRect.right += offset;
+			outlineRect.bottom += offset;
+
+			// Odd numbers
+			if (m_outlineThickness % 2)
+			{
+				outlineRect.left -= (offset + 1);
+				outlineRect.top -= (offset + 1);
+			}
+			// Even numbers
+			else
+			{
+				outlineRect.left -= offset;
+				outlineRect.top -= offset;
+			}
+		}
+
+		HPEN hOutlinePen = CreatePen(PS_SOLID, m_outlineThickness, m_outlineColor);
+		HPEN hOldPen = (HPEN)SelectObject(hDC, hOutlinePen);
+
+		// Points of the outline rectangle
+		POINT outlinePoints[5];
+		outlinePoints[0] = { outlineRect.left, outlineRect.top };
+		outlinePoints[1] = { outlineRect.left, outlineRect.bottom };
+		outlinePoints[2] = { outlineRect.right, outlineRect.bottom };
+		outlinePoints[3] = { outlineRect.right, outlineRect.top };
+		outlinePoints[4] = { outlineRect.left, outlineRect.top };
+
+		// Drawing of the outline
+		Polyline(hDC, outlinePoints, 5);
+
+		SelectObject(hDC, hOldPen);
+		DeleteObject(hOutlinePen);
+	}
 }
