@@ -4,7 +4,7 @@
 class Graphics
 {
 public:
-	Graphics(const HWND hWnd);
+	Graphics(const HWND m_hWnd);
 	~Graphics();
 
 	void clear();
@@ -13,11 +13,11 @@ public:
 	void draw(Shape &shape);
 
 private:
-	HWND hWnd;
+	HWND m_hWnd;
 
-	HDC backBuffer;
-	int savedDC;
-	HBITMAP hBmp, hBmpOld;
-	RECT clientRect;
+	HDC m_backBuffer;
+	int m_savedDC;
+	HBITMAP m_hBmp, m_hBmpOld;
+	RECT m_clientRect;
 	std::vector<RECT> m_objects;
 };

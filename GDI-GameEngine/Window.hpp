@@ -26,11 +26,11 @@ public:
 	const HWND getWindowHandle() const;
 
 private:
-	static LRESULT CALLBACK handleMessageSetup(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-	static LRESULT CALLBACK handleMessageThunk(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-	LRESULT CALLBACK handleMessage(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+	static LRESULT CALLBACK handleMessageSetup(HWND m_hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+	static LRESULT CALLBACK handleMessageThunk(HWND m_hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+	LRESULT CALLBACK handleMessage(HWND m_hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 private:
-	HWND hWnd;
-	PAINTSTRUCT ps;
+	HWND m_hWnd;
+	PAINTSTRUCT m_ps;
 };

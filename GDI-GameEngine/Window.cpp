@@ -47,11 +47,11 @@ Window::WindowClass::~WindowClass()
 Window::Window()
 {
 	// Create a window and store a pointer to this class in the lpParam
-	hWnd = CreateWindow(WindowClass::getName(), L"Desktop", WS_MINIMIZEBOX | WS_SYSMENU,
+	m_hWnd = CreateWindow(WindowClass::getName(), L"Desktop", WS_MINIMIZEBOX | WS_SYSMENU,
 		CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, WindowClass::getInstance(), this);
 
 	// Show the window
-	ShowWindow(hWnd, SW_SHOWDEFAULT);
+	ShowWindow(m_hWnd, SW_SHOWDEFAULT);
 }
 
 Window::~Window()
@@ -60,10 +60,10 @@ Window::~Window()
 
 const HWND Window::getWindowHandle() const
 {
-	return hWnd;
+	return m_hWnd;
 }
 
-LRESULT Window::handleMessageSetup(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+LRESULT Window::handleMessageSetup(HWND m_hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	if (msg == WM_NCCREATE)
 	{
@@ -72,24 +72,24 @@ LRESULT Window::handleMessageSetup(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lP
 		// Create a pointer to the window from the pCreate's lpParams
 		Window *pWnd = reinterpret_cast<Window*>(pCreate->lpCreateParams);
 		// Set the userdata of the window to a pointer of the window
-		SetWindowLongPtr(hWnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(pWnd));
+		SetWindowLongPtr(m_hWnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(pWnd));
 		// Set the window procedure to the handleMessageThunk
-		SetWindowLongPtr(hWnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(&Window::handleMessageThunk));
+		SetWindowLongPtr(m_hWnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(&Window::handleMessageThunk));
 		// Call the messageHandler
-		return pWnd->handleMessage(hWnd, msg, wParam, lParam);
+		return pWnd->handleMessage(m_hWnd, msg, wParam, lParam);
 	}
-	return DefWindowProc(hWnd, msg, wParam, lParam);
+	return DefWindowProc(m_hWnd, msg, wParam, lParam);
 }
 
-LRESULT Window::handleMessageThunk(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+LRESULT Window::handleMessageThunk(HWND m_hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	// Retrieve a pointer to the window
-	Window* const pWnd = reinterpret_cast<Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
+	Window* const pWnd = reinterpret_cast<Window*>(GetWindowLongPtr(m_hWnd, GWLP_USERDATA));
 	// Call the messageHandler
-	return pWnd->handleMessage(hWnd, msg, wParam, lParam);
+	return pWnd->handleMessage(m_hWnd, msg, wParam, lParam);
 }
 
-LRESULT Window::handleMessage(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+LRESULT Window::handleMessage(HWND m_hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)
 	{
@@ -107,9 +107,9 @@ LRESULT Window::handleMessage(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		break;
 	case WM_PAINT:
 	{
-		BeginPaint(hWnd, &ps);
+		BeginPaint(m_hWnd, &m_ps);
 
-		EndPaint(hWnd, &ps);
+		EndPaint(m_hWnd, &m_ps);
 	}
 	break;
 	case WM_KEYDOWN:
@@ -122,5 +122,5 @@ LRESULT Window::handleMessage(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		PostQuitMessage(0);
 		break;
 	}
-	return DefWindowProc(hWnd, msg, wParam, lParam);
+	return DefWindowProc(m_hWnd, msg, wParam, lParam);
 }
