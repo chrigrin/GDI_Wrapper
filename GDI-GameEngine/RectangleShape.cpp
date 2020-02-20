@@ -123,8 +123,10 @@ RECT RectangleShape::getRect()
 
 void RectangleShape::draw(HDC &hDC)
 {
+	// Get the rectangle to draw
 	RECT rect = getRect();
 
+	// Variables used for error checks on setting DC pen and brush
 	COLORREF returnPen, returnBrush;
 
 	// Set pen color (outer points of the rectangle)
@@ -174,6 +176,8 @@ void RectangleShape::draw(HDC &hDC)
 			}
 		}
 
+		// Create pen, select it into the HDC and store the old pen (needed
+		// for deletion)
 		HPEN hOutlinePen = CreatePen(PS_SOLID, m_outlineThickness, m_outlineColor);
 		HPEN hOldPen = (HPEN)SelectObject(hDC, hOutlinePen);
 
@@ -188,7 +192,9 @@ void RectangleShape::draw(HDC &hDC)
 		// Drawing of the outline
 		Polyline(hDC, outlinePoints, 5);
 
+		// Select the old pen to make the created pen deletable
 		SelectObject(hDC, hOldPen);
+		// Delete the created pen
 		DeleteObject(hOutlinePen);
 	}
 }
