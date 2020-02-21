@@ -6,6 +6,7 @@
 #include "Graphics.hpp"
 #include "Clock.hpp"
 #include "RectangleShape.hpp"
+#include "EllipseShape.hpp"
 #include <sstream>
 
 
@@ -29,16 +30,23 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	double dt;
 
 	RectangleShape rect, otherRect;
+	EllipseShape ellipse;
 
 	rect.setPosition(100, 100);
 	rect.setSize(100, 100);
 	rect.setFillColor(0, 255, 0);
-	rect.setOutlineThickness(-20);
+	rect.setOutlineThickness(50);
 	rect.setOutlineColor(0, 0, 255);
 
 	otherRect.setPosition(200, 200);
 	otherRect.setSize(200, 200);
 	otherRect.setFillColor(255, 0, 0);
+
+	ellipse.setSize(100, 100);
+	ellipse.setPosition(500, 100);
+	ellipse.setFillColor(0, 255, 255);
+	ellipse.setOutlineColor(255, 255, 0);
+	ellipse.setOutlineThickness(20);
 
     MSG msg;
 	GetMessage(&msg, nullptr, 0, 0);
@@ -58,6 +66,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			gfx.clear();
 			gfx.draw(rect);
 			gfx.draw(otherRect);
+			gfx.draw(ellipse);
 			gfx.display();
 
 			std::wstring wstr = std::to_wstring(dt);

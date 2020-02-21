@@ -36,6 +36,9 @@
     <ClInclude Include="RectangleShape.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="EllipseShape.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -54,6 +57,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="RectangleShape.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EllipseShape.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
