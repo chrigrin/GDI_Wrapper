@@ -147,54 +147,72 @@ void RectangleShape::draw(HDC &hDC)
 	if (m_outlineThickness != 0)
 	{
 		RECT outlineRect = getRect();
-		int offset;
-		if (m_outlineThickness == int(1 || -1))
+		drawOutline(hDC, outlineRect, m_outlineColor, m_outlineThickness);
+	}
+}
+
+void RectangleShape::drawOutline(HDC & hDC, RECT &outlineRect, COLORREF outlineColor, int outlineThickness)
+{
+	int offset;
+	if (outlineThickness == int(1 || -1))
+	{
+		// (1 / 2) on an int would be 0, therefore set the offset
+		// to the outlineThickness
+		offset = outlineThickness;
+		outlineRect.left -= offset;
+		outlineRect.top -= offset;
+		outlineRect.right += offset;
+		outlineRect.bottom += offset;
+	}
+	else
+	{
+		offset = outlineThickness / 2;
+		outlineRect.right += (offset + 1);
+		outlineRect.bottom += (offset + 1);
+
+		// Odd numbers
+		if (outlineThickness % 2)
 		{
-			// (1 / 2) on an int would be 0, therefore set the offset
-			// to the outlineThickness
-			offset = m_outlineThickness;
+			outlineRect.left -= (offset + 1);
+			outlineRect.top -= (offset + 1);
+		}
+		// Even numbers
+		else
+		{
 			outlineRect.left -= offset;
 			outlineRect.top -= offset;
 		}
-		else
-		{
-			offset = m_outlineThickness / 2;
-			outlineRect.right += offset;
-			outlineRect.bottom += offset;
-
-			// Odd numbers
-			if (m_outlineThickness % 2)
-			{
-				outlineRect.left -= (offset + 1);
-				outlineRect.top -= (offset + 1);
-			}
-			// Even numbers
-			else
-			{
-				outlineRect.left -= offset;
-				outlineRect.top -= offset;
-			}
-		}
-
-		// Create pen, select it into the HDC and store the old pen (needed
-		// for deletion)
-		HPEN hOutlinePen = CreatePen(PS_SOLID, m_outlineThickness, m_outlineColor);
-		HPEN hOldPen = (HPEN)SelectObject(hDC, hOutlinePen);
-
-		// Points of the outline rectangle
-		POINT outlinePoints[5];
-		outlinePoints[0] = { outlineRect.left, outlineRect.top };
-		outlinePoints[1] = { outlineRect.left, outlineRect.bottom };
-		outlinePoints[2] = { outlineRect.right, outlineRect.bottom };
-		outlinePoints[3] = { outlineRect.right, outlineRect.top };
-		outlinePoints[4] = { outlineRect.left, outlineRect.top };
-
-		// Drawing of the outline
-		Polyline(hDC, outlinePoints, 5);
-
-		// Select the old pen to make the created pen deletable
-		SelectObject(hDC, hOldPen);
-		// Delete the created pen
-		DeleteObject(hOutlinePen);
 	}
+
+	// Create a logbrush which is using the the outlinecolor
+	// retrieved from the parameter
+	LOGBRUSH lBrush = { BS_SOLID, outlineColor };
+	// Use ExtCreatePen to be able to use PS_JOIN_MITER, which is used
+	// to make the outline squared and not round
+	HPEN hOutlinePen = ExtCreatePen(PS_GEOMETRIC | PS_SOLID | PS_JOIN_MITER, 
+		outlineThickness, &lBrush, 0, 0);
+	// Select the new pen into the DC, and store the old pen
+	HPEN hOldPen = (HPEN)SelectObject(hDC, hOutlinePen);
+
+	// Drawing of the outline
+
+	// Call begin path to start capturing GDI shapes into a path
+	BeginPath(hDC);
+
+	// Draw the outline rectangle to the path
+	Rectangle(hDC, outlineRect.left, outlineRect.top, outlineRect.right, outlineRect.bottom);
+	
+	// End the capturing into the path
+	EndPath(hDC);
+
+	// Fill the outline of the outline rectangle (using the pen
+	// selected into the DC)
+	StrokePath(hDC);
+
+	// Finished drawing the outline
+
+	// Select the old pen to make the created pen deletable
+	SelectObject(hDC, hOldPen);
+	// Delete the created pen
+	DeleteObject(hOutlinePen);
 }

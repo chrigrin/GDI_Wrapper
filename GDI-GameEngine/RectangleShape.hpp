@@ -31,6 +31,9 @@ public:
 	void draw(HDC &hDC) override;
 
 private:
+	void drawOutline(HDC &hDC, RECT &outlineRect, COLORREF outlineColor, int outlineThickness);
+
+private:
 	int m_x, m_y;
 	int m_width, m_height;
 	int m_outlineThickness;

@@ -33,7 +33,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	rect.setPosition(100, 100);
 	rect.setSize(100, 100);
 	rect.setFillColor(0, 255, 0);
-	rect.setOutlineThickness(1);
+	rect.setOutlineThickness(-20);
 	rect.setOutlineColor(0, 0, 255);
 
 	otherRect.setPosition(200, 200);
