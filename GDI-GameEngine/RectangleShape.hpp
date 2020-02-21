@@ -25,14 +25,14 @@ public:
 	void move(int x, int y) override;
 	void move(std::pair<int, int> distance) override;
 
-	std::pair<int, int> getPosition() override;
-	std::pair<int, int> getSize() override;
+	const std::pair<int, int> getPosition() const override;
+	const std::pair<int, int> getSize() const override;
 	const RECT getRect() const override;
 
 	void draw(HDC &hDC) override;
 
 private:
-	RECT getOutlineRect();
+	const RECT getOutlineRect() const;
 	void drawOutline(HDC &hDC, RECT outlineRect) override;
 
 private:

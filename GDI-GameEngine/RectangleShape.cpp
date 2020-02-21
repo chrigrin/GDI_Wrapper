@@ -106,12 +106,12 @@ void RectangleShape::move(std::pair<int, int> distance)
 	move(distance.first, distance.second);
 }
 
-std::pair<int, int> RectangleShape::getPosition()
+const std::pair<int, int> RectangleShape::getPosition() const
 {
 	return std::pair<int, int>(m_x, m_y);
 }
 
-std::pair<int, int> RectangleShape::getSize()
+const std::pair<int, int> RectangleShape::getSize() const
 {
 	return std::pair<int, int>(m_width, m_height);
 }
@@ -156,7 +156,7 @@ void RectangleShape::draw(HDC &hDC)
 	}
 }
 
-RECT RectangleShape::getOutlineRect()
+const RECT RectangleShape::getOutlineRect()const
 {
 	// Retrieve the rectangle to be outlined
 	RECT outlineRect = getRect();
