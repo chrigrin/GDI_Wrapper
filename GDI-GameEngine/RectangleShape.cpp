@@ -17,6 +17,11 @@ RectangleShape::RectangleShape(int width, int height)
 	RectangleShape();
 }
 
+RectangleShape::RectangleShape(std::pair<int, int> size)
+{
+	RectangleShape(size.first, size.second);
+}
+
 RectangleShape::RectangleShape(int x, int y, int width, int height)
 	:
 	m_x(x),
@@ -30,7 +35,7 @@ RectangleShape::RectangleShape(std::pair<int, int> pos, std::pair<int, int> size
 	RectangleShape(pos.first, pos.second, size.first, size.second);
 }
 
-RectangleShape::RectangleShape(RECT & rect)
+RectangleShape::RectangleShape(RECT rect)
 {
 	int width, height;
 	width = rect.right - rect.left;
@@ -111,7 +116,7 @@ std::pair<int, int> RectangleShape::getSize()
 	return std::pair<int, int>(m_width, m_height);
 }
 
-RECT RectangleShape::getRect()
+const RECT RectangleShape::getRect() const
 {
 	RECT rect;
 	int width, height;
@@ -123,7 +128,7 @@ RECT RectangleShape::getRect()
 
 void RectangleShape::draw(HDC &hDC)
 {
-	// Get the rectangle to draw
+	// Retrieve the rectangle to draw
 	RECT rect = getRect();
 
 	// Variables used for error checks on setting DC pen and brush
@@ -140,25 +145,28 @@ void RectangleShape::draw(HDC &hDC)
 	if (returnBrush == CLR_INVALID)
 		MessageBox(nullptr, L"Could not set brush color", L"Error", MB_ICONERROR);
 
-	// Draw the rectangle before the outline (makes negative outlines possible)
+	// Draw the rectangle before the outline to support negative outlines
 	Rectangle(hDC, rect.left, rect.top, rect.right, rect.bottom);
 
-	// If an outline is specified create a custom outline for the rectangle
+	// If an outline is specified create a an outline for the rectangle
 	if (m_outlineThickness != 0)
 	{
-		RECT outlineRect = getRect();
-		drawOutline(hDC, outlineRect, m_outlineColor, m_outlineThickness);
+		RECT outlineRect = getOutlineRect();
+		drawOutline(hDC, outlineRect);
 	}
 }
 
-void RectangleShape::drawOutline(HDC & hDC, RECT &outlineRect, COLORREF outlineColor, int outlineThickness)
+RECT RectangleShape::getOutlineRect()
 {
+	// Retrieve the rectangle to be outlined
+	RECT outlineRect = getRect();
+
 	int offset;
-	if (outlineThickness == int(1 || -1))
+	if (m_outlineThickness == int(1 || -1))
 	{
 		// (1 / 2) on an int would be 0, therefore set the offset
 		// to the outlineThickness
-		offset = outlineThickness;
+		offset = m_outlineThickness;
 		outlineRect.left -= offset;
 		outlineRect.top -= offset;
 		outlineRect.right += offset;
@@ -166,12 +174,12 @@ void RectangleShape::drawOutline(HDC & hDC, RECT &outlineRect, COLORREF outlineC
 	}
 	else
 	{
-		offset = outlineThickness / 2;
+		offset = m_outlineThickness / 2;
 		outlineRect.right += (offset + 1);
 		outlineRect.bottom += (offset + 1);
 
 		// Odd numbers
-		if (outlineThickness % 2)
+		if (m_outlineThickness % 2)
 		{
 			outlineRect.left -= (offset + 1);
 			outlineRect.top -= (offset + 1);
@@ -183,18 +191,28 @@ void RectangleShape::drawOutline(HDC & hDC, RECT &outlineRect, COLORREF outlineC
 			outlineRect.top -= offset;
 		}
 	}
+	return outlineRect;
+}
+
+void RectangleShape::drawOutline(HDC & hDC, RECT outlineRect)
+{
+	////////////////////////////////////////////
+	// Setup
 
 	// Create a logbrush which is using the the outlinecolor
 	// retrieved from the parameter
-	LOGBRUSH lBrush = { BS_SOLID, outlineColor };
+	LOGBRUSH lBrush = { BS_SOLID, m_outlineColor };
 	// Use ExtCreatePen to be able to use PS_JOIN_MITER, which is used
 	// to make the outline squared and not round
 	HPEN hOutlinePen = ExtCreatePen(PS_GEOMETRIC | PS_SOLID | PS_JOIN_MITER, 
-		outlineThickness, &lBrush, 0, 0);
+		m_outlineThickness, &lBrush, 0, 0);
 	// Select the new pen into the DC, and store the old pen
 	HPEN hOldPen = (HPEN)SelectObject(hDC, hOutlinePen);
+	// Finished setup
+	////////////////////////////////////////////
 
-	// Drawing of the outline
+	////////////////////////////////////////////
+	// Start drawing the outline
 
 	// Call begin path to start capturing GDI shapes into a path
 	BeginPath(hDC);
@@ -210,9 +228,15 @@ void RectangleShape::drawOutline(HDC & hDC, RECT &outlineRect, COLORREF outlineC
 	StrokePath(hDC);
 
 	// Finished drawing the outline
+	////////////////////////////////////////////
+
+	////////////////////////////////////////////
+	// Deletion
 
 	// Select the old pen to make the created pen deletable
 	SelectObject(hDC, hOldPen);
 	// Delete the created pen
 	DeleteObject(hOutlinePen);
+	// Finished deletion
+	////////////////////////////////////////////
 }

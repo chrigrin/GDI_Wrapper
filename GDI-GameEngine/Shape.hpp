@@ -8,6 +8,7 @@ public:
 
 	virtual void setFillColor(unsigned char r, unsigned char g, unsigned char b) = 0;
 	virtual void setOutlineColor(unsigned char r, unsigned char g, unsigned char b) = 0;
+	virtual void setOutlineThickness(int outlineThickness) = 0;
 
 	virtual void setPosition(int x, int y) = 0;
 	virtual void setPosition(std::pair<int, int> pos) = 0;
@@ -18,9 +19,12 @@ public:
 	virtual void move(int x, int y) = 0;
 	virtual void move(std::pair<int, int> distance) = 0;
 
-	virtual std::pair<int, int> getPosition() = 0;
-	virtual std::pair<int, int> getSize() = 0;
-	virtual RECT getRect() = 0;
+	virtual const std::pair<int, int> getPosition() const = 0;
+	virtual const std::pair<int, int> getSize() const = 0;
+	virtual const RECT getRect() const = 0;
 
 	virtual void draw(HDC &hDC) = 0;
+
+protected:
+	virtual void drawOutline(HDC &hDC, RECT outlineRect) = 0;
 };
