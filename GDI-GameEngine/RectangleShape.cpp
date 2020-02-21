@@ -130,7 +130,7 @@ void RectangleShape::draw(HDC &hDC)
 	COLORREF returnPen, returnBrush;
 
 	// Set pen color (outer points of the rectangle)
-	returnPen = SetDCPenColor(hDC, RGB(255, 0, 0));
+	returnPen = SetDCPenColor(hDC, m_fillColor);
 	// Set brush color (fill color of the rectangle)
 	returnBrush = SetDCBrushColor(hDC, m_fillColor);
 
