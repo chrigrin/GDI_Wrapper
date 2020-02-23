@@ -20,20 +20,20 @@ public:
 	void setPosition(std::pair<int, int> pos) override;
 	void setSize(int width, int height) override;
 	void setSize(std::pair<int, int> size) override;
-	void setRect(RECT &rect) override;
+	void setRect(RECT rect) override;
 
 	void move(int x, int y) override;
 	void move(std::pair<int, int> distance) override;
 
-	const std::pair<int, int> getPosition() const override;
-	const std::pair<int, int> getSize() const override;
-	const RECT getRect() const override;
+	std::pair<int, int> getPosition() const override;
+	std::pair<int, int> getSize() const override;
+	RECT getRect() const override;
 
-	void draw(HDC &hDC) override;
+	void draw(HDC hDC) const override;
 
 private:
 	const RECT getOutlineRect() const;
-	void drawOutline(HDC &hDC, RECT outlineRect) override;
+	void drawOutline(HDC hDC, RECT outlineRect) const override;
 
 private:
 	int m_x, m_y;

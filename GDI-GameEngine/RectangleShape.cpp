@@ -85,7 +85,7 @@ void RectangleShape::setSize(std::pair<int, int> size)
 	setSize(size.first, size.second);
 }
 
-void RectangleShape::setRect(RECT & rect)
+void RectangleShape::setRect(RECT rect)
 {
 	int width, height;
 	width = rect.right - rect.left;
@@ -106,17 +106,17 @@ void RectangleShape::move(std::pair<int, int> distance)
 	move(distance.first, distance.second);
 }
 
-const std::pair<int, int> RectangleShape::getPosition() const
+std::pair<int, int> RectangleShape::getPosition() const
 {
 	return std::pair<int, int>(m_x, m_y);
 }
 
-const std::pair<int, int> RectangleShape::getSize() const
+std::pair<int, int> RectangleShape::getSize() const
 {
 	return std::pair<int, int>(m_width, m_height);
 }
 
-const RECT RectangleShape::getRect() const
+RECT RectangleShape::getRect() const
 {
 	RECT rect;
 	int width, height;
@@ -126,7 +126,7 @@ const RECT RectangleShape::getRect() const
 	return rect;
 }
 
-void RectangleShape::draw(HDC &hDC)
+void RectangleShape::draw(HDC hDC) const
 {
 	// Retrieve the rectangle to draw
 	RECT rect = getRect();
@@ -156,7 +156,7 @@ void RectangleShape::draw(HDC &hDC)
 	}
 }
 
-const RECT RectangleShape::getOutlineRect()const
+const RECT RectangleShape::getOutlineRect() const
 {
 	// Retrieve the rectangle to be outlined
 	RECT outlineRect = getRect();
@@ -194,16 +194,16 @@ const RECT RectangleShape::getOutlineRect()const
 	return outlineRect;
 }
 
-void RectangleShape::drawOutline(HDC & hDC, RECT outlineRect)
+void RectangleShape::drawOutline(HDC hDC, RECT outlineRect) const
 {
 	////////////////////////////////////////////
 	// Setup
 
 	// Create a logbrush which is using the the outlinecolor
-	// retrieved from the parameter
+	// retrieved from the parameter (needed in ExtCreatePen)
 	LOGBRUSH lBrush = { BS_SOLID, m_outlineColor };
 	// Use ExtCreatePen to be able to use PS_JOIN_MITER, which is used
-	// to make the outline squared and not round
+	// to make the outline squared and not round (which is default)
 	HPEN hOutlinePen = ExtCreatePen(PS_GEOMETRIC | PS_SOLID | PS_JOIN_MITER, 
 		m_outlineThickness, &lBrush, 0, 0);
 	// Select the new pen into the DC, and store the old pen

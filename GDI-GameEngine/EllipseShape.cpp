@@ -8,18 +8,8 @@ EllipseShape::EllipseShape()
 {
 }
 
-EllipseShape::EllipseShape(double radius)
-	:
-	m_radius(radius),
-	m_width(static_cast<int>(radius * 2)),
-	m_height(static_cast<int>(radius * 2))
-{
-	EllipseShape();
-}
-
 EllipseShape::EllipseShape(int width, int height)
 	:
-	m_radius(0),
 	m_width(width),
 	m_height(height)
 {
@@ -29,19 +19,6 @@ EllipseShape::EllipseShape(int width, int height)
 EllipseShape::EllipseShape(std::pair<int, int> size)
 {
 	EllipseShape(size.first, size.second);
-}
-
-EllipseShape::EllipseShape(double radius, int x, int y)
-	:
-	m_x(x),
-	m_y(y)
-{
-	EllipseShape(static_cast<double>(radius));
-}
-
-EllipseShape::EllipseShape(double radius, std::pair<int, int> pos)
-{
-	EllipseShape(radius, pos.first, pos.second);
 }
 
 EllipseShape::EllipseShape(int width, int height, int x, int y)
@@ -94,11 +71,6 @@ void EllipseShape::setPosition(std::pair<int, int> pos)
 
 void EllipseShape::setSize(int width, int height)
 {
-	if (width == height)
-		m_radius = static_cast<double>(width / 2);
-	else
-		m_radius = 0;
-
 	m_width = width;
 	m_height = height;
 }
@@ -108,7 +80,7 @@ void EllipseShape::setSize(std::pair<int, int> size)
 	setSize(size.first, size.second);
 }
 
-void EllipseShape::setRect(RECT & rect)
+void EllipseShape::setRect(RECT rect)
 {
 	int width, height;
 	width = rect.right - rect.left;
@@ -116,13 +88,6 @@ void EllipseShape::setRect(RECT & rect)
 
 	setPosition(rect.left, rect.top);
 	setSize(width, height);
-}
-
-void EllipseShape::setRadius(double radius)
-{
-	m_radius = radius;
-	m_width = static_cast<int>(radius * 2);
-	m_height = static_cast<int>(radius * 2);
 }
 
 void EllipseShape::move(int x, int y)
@@ -136,17 +101,17 @@ void EllipseShape::move(std::pair<int, int> distance)
 	move(distance.first, distance.second);
 }
 
-const std::pair<int, int> EllipseShape::getPosition() const
+std::pair<int, int> EllipseShape::getPosition() const
 {
 	return std::pair<int, int>(m_x, m_y);
 }
 
-const std::pair<int, int> EllipseShape::getSize() const
+std::pair<int, int> EllipseShape::getSize() const
 {
 	return std::pair<int, int>(m_width, m_height);
 }
 
-const RECT EllipseShape::getRect() const
+RECT EllipseShape::getRect() const
 {
 	RECT rect;
 	int width, height;
@@ -156,19 +121,13 @@ const RECT EllipseShape::getRect() const
 	return rect;
 }
 
-const double EllipseShape::getRadius() const
-{
-	return m_radius;
-}
-
-void EllipseShape::draw(HDC & hDC)
+void EllipseShape::draw(HDC hDC) const
 {
 	// Retrieve the ellipse's rectangle (used in the drawing function)
 	RECT ellipseRect = getRect();
 
 	SetDCPenColor(hDC, RGB(255, 0, 255));
 	SetDCBrushColor(hDC, m_fillColor);
-
 
 	// Draw before the outline to support negative outlines
 	Ellipse(hDC, ellipseRect.left, ellipseRect.top, ellipseRect.right, ellipseRect.bottom);
@@ -180,16 +139,16 @@ void EllipseShape::draw(HDC & hDC)
 	}
 }
 
-void EllipseShape::drawOutline(HDC & hDC, RECT outlineRect)
+void EllipseShape::drawOutline(HDC hDC, RECT outlineRect) const
 {
 	////////////////////////////////////////////
 	// Setup
 
 	// Create a logbrush which is using the the outlinecolor
-	// retrieved from the parameter
+	// retrieved from the parameter (needed in ExtCreatePen)
 	LOGBRUSH lBrush = { BS_SOLID, m_outlineColor };
 	// Use ExtCreatePen to be able to use PS_JOIN_MITER, which is used
-	// to make the outline squared and not round
+	// to make the outline squared and not round (which is default)
 	HPEN hOutlinePen = ExtCreatePen(PS_GEOMETRIC | PS_SOLID | PS_JOIN_MITER,
 		m_outlineThickness, &lBrush, 0, 0);
 	// Select the new pen into the DC, and store the old pen

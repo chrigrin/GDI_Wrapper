@@ -5,11 +5,8 @@ class EllipseShape : public Shape
 {
 public:
 	EllipseShape();
-	EllipseShape(double radius);
 	EllipseShape(int width, int height);
 	EllipseShape(std::pair<int, int> size);
-	EllipseShape(double radius, int x, int y);
-	EllipseShape(double radius, std::pair<int, int> pos);
 	EllipseShape(int width, int height, int x, int y);
 	EllipseShape(std::pair<int, int> size, std::pair<int, int> pos);
 	EllipseShape(RECT rect);
@@ -22,28 +19,23 @@ public:
 	void setPosition(std::pair<int, int> pos) override;
 	void setSize(int width, int height) override;
 	void setSize(std::pair<int, int> size) override;
-	void setRect(RECT &rect) override;
-	void setRadius(double radius);
+	void setRect(RECT rect) override;
 
 	void move(int x, int y) override;
 	void move(std::pair<int, int> distance) override;
 
-	const std::pair<int, int> getPosition() const override;
-	const std::pair<int, int> getSize() const override;
-	const RECT getRect() const override;
-	// If the width and height are different, getRadius()
-	// returns 0
-	const double getRadius() const;
+	std::pair<int, int> getPosition() const override;
+	std::pair<int, int> getSize() const override;
+	RECT getRect() const override;
 
-	void draw(HDC &hDC) override;
+	void draw(HDC hDC) const override;
 
 private:
-	void drawOutline(HDC &hDC, RECT outlineRect);
+	void drawOutline(HDC hDC, RECT outlineRect) const;
 
 private:
 	int m_x, m_y;
 	int m_width, m_height;
-	double m_radius;
 	int m_outlineThickness;
 	COLORREF m_fillColor, m_outlineColor;
 };

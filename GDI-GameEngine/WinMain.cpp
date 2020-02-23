@@ -7,6 +7,7 @@
 #include "Clock.hpp"
 #include "RectangleShape.hpp"
 #include "EllipseShape.hpp"
+#include "CircleShape.hpp"
 #include <sstream>
 
 
@@ -18,11 +19,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_ LPWSTR    lpCmdLine,
                      _In_ int       nCmdShow)
 {
-    UNREFERENCED_PARAMETER(hPrevInstance);
-    UNREFERENCED_PARAMETER(lpCmdLine);
-
-    // TODO: Place code here.
-
 	Window someWindow;
 
 	Graphics gfx(someWindow.getWindowHandle());
@@ -30,7 +26,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	double dt;
 
 	RectangleShape rect, otherRect;
-	EllipseShape ellipse;
 
 	rect.setPosition(100, 100);
 	rect.setSize(100, 100);
@@ -42,13 +37,23 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	otherRect.setSize(200, 200);
 	otherRect.setFillColor(255, 0, 0);
 
+	EllipseShape ellipse;
+
 	ellipse.setSize(100, 100);
-	ellipse.setPosition(500, 100);
+	ellipse.setPosition(500, 0);
 	ellipse.setFillColor(0, 255, 255);
 	ellipse.setOutlineColor(255, 255, 0);
 	ellipse.setOutlineThickness(20);
 
-    MSG msg;
+	CircleShape circle;
+
+	circle.setPosition(650, 0);
+	circle.setRadius(33.33);
+	circle.setFillColor(255, 0, 255);
+	circle.setOutlineColor(128, 255, 128);
+	circle.setOutlineThickness(20);
+
+	MSG msg;
 	GetMessage(&msg, nullptr, 0, 0);
 
     // Main message loop:
@@ -67,6 +72,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			gfx.draw(rect);
 			gfx.draw(otherRect);
 			gfx.draw(ellipse);
+			gfx.draw(circle);
 			gfx.display();
 
 			std::wstring wstr = std::to_wstring(dt);

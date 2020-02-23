@@ -149,6 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CircleShape.hpp" />
     <ClInclude Include="EllipseShape.hpp" />
     <ClInclude Include="Graphics.hpp" />
     <ClInclude Include="RectangleShape.hpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="Window.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CircleShape.cpp" />
     <ClCompile Include="EllipseShape.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="RectangleShape.cpp" />

@@ -4,13 +4,13 @@
 class Graphics
 {
 public:
-	Graphics(const HWND m_hWnd);
+	Graphics(HWND hWnd);
 	~Graphics();
 
 	void clear();
-	void display();
+	void display() const;
 
-	void draw(Shape &shape);
+	void draw(const Shape &shape);
 
 private:
 	HWND m_hWnd;

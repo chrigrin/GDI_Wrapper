@@ -1,15 +1,15 @@
 #include "stdafx.h"
 #include "Graphics.hpp"
 
-Graphics::Graphics(const HWND m_hWnd)
+Graphics::Graphics(HWND hWnd)
 	:
-	m_hWnd(m_hWnd)
+	m_hWnd(hWnd)
 {
 	// Retrieve the client rect
-	GetClientRect(m_hWnd, &m_clientRect);
+	GetClientRect(hWnd, &m_clientRect);
 
 	// Get the device context for the window
-	HDC wndDC = GetDC(m_hWnd);
+	HDC wndDC = GetDC(hWnd);
 	// Create a compatible backbuffer
 	m_backBuffer = CreateCompatibleDC(wndDC);
 	// Create a bitmap, compatible with the window DC (Making it compatible 
@@ -24,7 +24,7 @@ Graphics::Graphics(const HWND m_hWnd)
 	BitBlt(wndDC, m_clientRect.left, m_clientRect.top, m_clientRect.right, m_clientRect.bottom,
 		nullptr, 0, 0, BLACKNESS);
 	// Release the device context to prevent leaks
-	ReleaseDC(m_hWnd, wndDC);
+	ReleaseDC(hWnd, wndDC);
 }
 
 Graphics::~Graphics()
@@ -49,7 +49,7 @@ void Graphics::clear()
 	}
 }
 
-void Graphics::display()
+void Graphics::display() const
 {
 	// Get the device context for the window
 	HDC wndDC = GetDC(m_hWnd);
@@ -62,7 +62,7 @@ void Graphics::display()
 	ReleaseDC(m_hWnd, wndDC);
 }
 
-void Graphics::draw(Shape & shape)
+void Graphics::draw(const Shape & shape)
 {
 	// Save the state of the backbuffer (Pens, brushes, etc.)
 	m_savedDC = SaveDC(m_backBuffer);

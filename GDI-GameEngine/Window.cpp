@@ -59,7 +59,7 @@ Window::~Window()
 	DestroyWindow(m_hWnd);
 }
 
-const HWND Window::getWindowHandle() const
+HWND Window::getWindowHandle() const
 {
 	return m_hWnd;
 }
