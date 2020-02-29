@@ -32,6 +32,7 @@ public:
 
 private:
 	void drawOutline(HDC hDC, RECT outlineRect) const;
+	RECT getOutlineRect() const;
 
 private:
 	int m_x, m_y;

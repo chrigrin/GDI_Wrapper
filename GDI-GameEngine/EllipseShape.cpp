@@ -126,7 +126,7 @@ void EllipseShape::draw(HDC hDC) const
 	// Retrieve the ellipse's rectangle (used in the drawing function)
 	RECT ellipseRect = getRect();
 
-	SetDCPenColor(hDC, RGB(255, 0, 255));
+	SetDCPenColor(hDC, m_fillColor);
 	SetDCBrushColor(hDC, m_fillColor);
 
 	// Draw before the outline to support negative outlines
@@ -135,7 +135,8 @@ void EllipseShape::draw(HDC hDC) const
 	// Draw an outline if it is specified
 	if (m_outlineThickness != 0)
 	{
-		drawOutline(hDC, ellipseRect);
+		RECT outlineRect = getOutlineRect();
+		drawOutline(hDC, outlineRect);
 	}
 }
 
@@ -159,18 +160,8 @@ void EllipseShape::drawOutline(HDC hDC, RECT outlineRect) const
 	////////////////////////////////////////////
 	// Start drawing the outline
 
-	// Call begin path to start capturing GDI shapes into a path
-	BeginPath(hDC);
-
-	// Draw the outline rectangle to the path
-	Ellipse(hDC, outlineRect.left, outlineRect.top, outlineRect.right, outlineRect.bottom);
-
-	// End the capturing into the path
-	EndPath(hDC);
-
-	// Fill the outline of the outline rectangle (using the pen
-	// selected into the DC)
-	StrokePath(hDC);
+	Arc(hDC, outlineRect.left, outlineRect.top, outlineRect.right, outlineRect.bottom,
+		outlineRect.left, outlineRect.top, outlineRect.left, outlineRect.top);
 
 	// Finished drawing the outline
 	////////////////////////////////////////////
@@ -184,4 +175,36 @@ void EllipseShape::drawOutline(HDC hDC, RECT outlineRect) const
 	DeleteObject(hOutlinePen);
 	// Finished deletion
 	////////////////////////////////////////////
+}
+
+RECT EllipseShape::getOutlineRect() const
+{
+	RECT outlineRect = getRect();
+	int offset = 0;
+
+	// Only semi good solution. Framing a circle without overlapping the
+	// edge of the circle isn't possible (as far as I know).
+	// Only one pixel is being currently overlapped, when using outlines
+	if (m_outlineThickness == int(1 || -1))
+	{
+		offset = m_outlineThickness - 1;
+	}
+	else
+	{
+		if (m_outlineThickness % 2)
+		{
+			offset = m_outlineThickness / 2;
+		}
+		else
+		{
+			offset = m_outlineThickness - 1;
+		}
+	}
+
+	outlineRect.left -= offset;
+	outlineRect.top -= offset;
+	outlineRect.right += offset;
+	outlineRect.bottom += offset;
+
+	return outlineRect;
 }
