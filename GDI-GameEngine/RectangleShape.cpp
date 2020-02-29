@@ -161,10 +161,10 @@ const RECT RectangleShape::getOutlineRect() const
 	// Retrieve the rectangle to be outlined
 	RECT outlineRect = getRect();
 
-	int offset;
+	int offset = 0;
 	if (m_outlineThickness == int(1 || -1))
 	{
-		// (1 / 2) on an int would be 0, therefore set the offset
+		// (1 / 2) of an int would be 0, therefore set the offset
 		// to the outlineThickness
 		offset = m_outlineThickness;
 		outlineRect.left -= offset;
