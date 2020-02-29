@@ -27,10 +27,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	RectangleShape rect, otherRect;
 
-	rect.setPosition(100, 100);
+	rect.setPosition(50, 50);
 	rect.setSize(100, 100);
 	rect.setFillColor(0, 255, 0);
-	rect.setOutlineThickness(50);
+	rect.setOutlineThickness(1);
 	rect.setOutlineColor(0, 0, 255);
 
 	otherRect.setPosition(200, 200);
@@ -43,15 +43,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	ellipse.setPosition(500, 0);
 	ellipse.setFillColor(0, 255, 255);
 	ellipse.setOutlineColor(255, 255, 0);
-	ellipse.setOutlineThickness(20);
+	ellipse.setOutlineThickness(3);
 
 	CircleShape circle;
 
 	circle.setPosition(650, 0);
 	circle.setRadius(33.33);
-	circle.setFillColor(255, 0, 255);
-	circle.setOutlineColor(128, 255, 128);
-	circle.setOutlineThickness(20);
+	circle.setFillColor(0, 255, 255);
+	circle.setOutlineColor(255, 255, 0);
+	circle.setOutlineThickness(1);
 
 	MSG msg;
 	GetMessage(&msg, nullptr, 0, 0);
@@ -66,7 +66,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
 		else
 		{
-			dt = clock.restart();
+			dt = clock.getElapsedTime();
 
 			gfx.clear();
 			gfx.draw(rect);
