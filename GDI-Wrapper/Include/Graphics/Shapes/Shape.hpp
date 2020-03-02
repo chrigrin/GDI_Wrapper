@@ -1,6 +1,8 @@
 #pragma once
+#include "../../Export/Export.hpp"
+#include <utility>
 
-class Shape
+class GDIWRAPPER_API Shape
 {
 public:
 	Shape() = default;

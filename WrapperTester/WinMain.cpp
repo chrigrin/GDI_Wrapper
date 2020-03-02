@@ -2,14 +2,7 @@
 //
 
 #include "stdafx.h"
-#include "Window.hpp"
-#include "Graphics.hpp"
-#include "Clock.hpp"
-#include "RectangleShape.hpp"
-#include "EllipseShape.hpp"
-#include "CircleShape.hpp"
 #include <sstream>
-
 
 // Global Variables:
 HWND hMainWnd;

@@ -1,7 +1,7 @@
 #pragma once
 #include "EllipseShape.hpp"
 
-class CircleShape : public EllipseShape
+class GDIWRAPPER_API CircleShape : public EllipseShape
 {
 public:
 	CircleShape();

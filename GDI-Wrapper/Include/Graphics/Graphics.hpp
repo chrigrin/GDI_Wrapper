@@ -1,7 +1,9 @@
 #pragma once
-#include "Shape.hpp"
+#include "../Export/Export.hpp"
+#include "Shapes/Shape.hpp"
+#include <vector>
 
-class Graphics
+class GDIWRAPPER_API Graphics
 {
 public:
 	Graphics(HWND hWnd);

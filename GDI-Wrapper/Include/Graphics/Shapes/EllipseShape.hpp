@@ -1,16 +1,15 @@
 #pragma once
 #include "Shape.hpp"
 
-class RectangleShape : public Shape
+class GDIWRAPPER_API EllipseShape : public Shape
 {
 public:
-	RectangleShape();
-	RectangleShape(int width, int height);
-	RectangleShape(std::pair<int, int> size);
-	RectangleShape(int x, int y, int width, int height);
-	RectangleShape(std::pair<int, int> pos, std::pair<int, int> size);
-	RectangleShape(RECT rect);
-	virtual ~RectangleShape();
+	EllipseShape();
+	EllipseShape(int width, int height);
+	EllipseShape(std::pair<int, int> size);
+	EllipseShape(int width, int height, int x, int y);
+	EllipseShape(std::pair<int, int> size, std::pair<int, int> pos);
+	EllipseShape(RECT rect);
 
 	void setFillColor(unsigned char r, unsigned char g, unsigned char b) override;
 	void setOutlineColor(unsigned char r, unsigned char g, unsigned char b) override;
@@ -32,8 +31,8 @@ public:
 	void draw(HDC hDC) const override;
 
 private:
-	const RECT getOutlineRect() const;
-	void drawOutline(HDC hDC, RECT outlineRect) const override;
+	void drawOutline(HDC hDC, RECT outlineRect) const;
+	RECT getOutlineRect() const;
 
 private:
 	int m_x, m_y;

@@ -1,9 +1,10 @@
 #pragma once
+#include "../Export/Export.hpp"
 
-class Window
+class GDIWRAPPER_API Window
 {
 private:
-	class WindowClass
+	class GDIWRAPPER_API WindowClass
 	{
 	public:
 		static const wchar_t *getName();

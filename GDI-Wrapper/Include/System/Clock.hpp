@@ -1,7 +1,8 @@
 #pragma once
+#include "../Export/Export.hpp"
 #include <chrono>
 
-class Clock
+class GDIWRAPPER_API Clock
 {
 public:
 	Clock();

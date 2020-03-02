@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Link Files">
+      <UniqueIdentifier>{0a2262f4-45bc-4362-a703-13a2dedfb1a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Export">
+      <UniqueIdentifier>{de533c35-1696-41c6-9548-84c21e0bb538}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{b5e9f3b0-8a8c-4c88-ad3e-25ed983048ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Shapes">
+      <UniqueIdentifier>{f2e53220-79ce-40e1-bb3b-0af43c27d31f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Window">
+      <UniqueIdentifier>{b7938344-50fc-417e-ae49-6cc1207a650c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{6d5e72f7-ecff-42a7-af19-cadf30723a94}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Link.hpp">
+      <Filter>Link Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Export\Export.hpp">
+      <Filter>Export</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Graphics\Shapes\CircleShape.hpp">
+      <Filter>Graphics\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Graphics\Shapes\EllipseShape.hpp">
+      <Filter>Graphics\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Graphics\Shapes\RectangleShape.hpp">
+      <Filter>Graphics\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Graphics\Shapes\Shape.hpp">
+      <Filter>Graphics\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Graphics\Graphics.hpp">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\System\Clock.hpp">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Window\Window.hpp">
+      <Filter>Window</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Graphics\Shapes\CircleShape.cpp">
+      <Filter>Graphics\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Graphics\Shapes\EllipseShape.cpp">
+      <Filter>Graphics\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Graphics\Shapes\RectangleShape.cpp">
+      <Filter>Graphics\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Graphics\Graphics.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\System\Clock.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Window\Window.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
