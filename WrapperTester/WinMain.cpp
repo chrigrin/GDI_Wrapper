@@ -70,7 +70,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 			std::wstring wstr = std::to_wstring(dt);
 			SetWindowText(someWindow.getWindowHandle(), wstr.c_str());
-			//rect.move(int(1000 * dt), 0);
+			rect.move(1, 0);
+			ellipse.move(0, 1);
 		}
     }
 

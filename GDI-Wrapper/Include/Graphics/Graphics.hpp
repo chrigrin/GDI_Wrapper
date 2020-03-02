@@ -21,5 +21,5 @@ private:
 	int m_savedDC;
 	HBITMAP m_hBmp, m_hBmpOld;
 	RECT m_clientRect;
-	std::vector<RECT> m_objects;
+	std::vector<RECT> m_shapes;
 };

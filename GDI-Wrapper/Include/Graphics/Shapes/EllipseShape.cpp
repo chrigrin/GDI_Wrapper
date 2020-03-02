@@ -121,7 +121,7 @@ RECT EllipseShape::getRect() const
 	return rect;
 }
 
-void EllipseShape::draw(HDC hDC) const
+RECT EllipseShape::draw(HDC hDC) const
 {
 	// Retrieve the ellipse's rectangle (used in the drawing function)
 	RECT ellipseRect = getRect();
@@ -137,6 +137,21 @@ void EllipseShape::draw(HDC hDC) const
 	{
 		RECT outlineRect = getOutlineRect();
 		drawOutline(hDC, outlineRect);
+
+		// Return the outlineRect to be able to clear the outline every frame
+		// Add a pixel in evry direction to be sure to clear the outline too
+		// The getOutline() function is only semi good, and returns a pixel too small
+		// to be there are no gaps between the circle and the outline
+		outlineRect.left -= 1;
+		outlineRect.top -= 1;
+		outlineRect.right += 1;
+		outlineRect.bottom += 1;
+		return outlineRect;
+	}
+	else
+	{
+		// Return the ellipseRect when there is no outline
+		return ellipseRect;
 	}
 }
 

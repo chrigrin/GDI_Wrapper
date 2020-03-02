@@ -25,7 +25,7 @@ public:
 	virtual std::pair<int, int> getSize() const = 0;
 	virtual RECT getRect() const = 0;
 
-	virtual void draw(HDC hDC) const = 0;
+	virtual RECT draw(HDC hDC) const = 0;
 
 protected:
 	virtual void drawOutline(HDC hDC, RECT outlineRect) const = 0;

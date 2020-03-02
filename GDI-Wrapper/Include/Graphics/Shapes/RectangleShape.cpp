@@ -126,7 +126,7 @@ RECT RectangleShape::getRect() const
 	return rect;
 }
 
-void RectangleShape::draw(HDC hDC) const
+RECT RectangleShape::draw(HDC hDC) const
 {
 	// Retrieve the rectangle to draw
 	RECT rect = getRect();
@@ -153,6 +153,14 @@ void RectangleShape::draw(HDC hDC) const
 	{
 		RECT outlineRect = getOutlineRect();
 		drawOutline(hDC, outlineRect);
+
+		// Return the outlineRect to be able to clear the outline every frame
+		return outlineRect;
+	}
+	else
+	{
+		// Return the rect when there is no outline
+		return rect;
 	}
 }
 

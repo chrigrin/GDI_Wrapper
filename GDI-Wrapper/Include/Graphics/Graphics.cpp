@@ -40,12 +40,12 @@ Graphics::~Graphics()
 void Graphics::clear()
 {
 	// Check if there are any objects not cleared
-	while (m_objects.size() > 0)
+	while (m_shapes.size() > 0)
 	{
 		// Draw a black rectangle over the last object in the vector
-		FillRect(m_backBuffer, &m_objects.back(), CreateSolidBrush(BLACK_BRUSH));
+		FillRect(m_backBuffer, &m_shapes.back(), CreateSolidBrush(BLACK_BRUSH));
 		// Pop the last object in the vector
-		m_objects.pop_back();
+		m_shapes.pop_back();
 	}
 }
 
@@ -67,10 +67,10 @@ void Graphics::draw(const Shape & shape)
 	// Save the state of the backbuffer (Pens, brushes, etc.)
 	m_savedDC = SaveDC(m_backBuffer);
 
-	// Push back a copy of the rect that will be drawn
-	m_objects.push_back(shape.getRect());
 	// Draw the shape to the backbuffer
-	shape.draw(m_backBuffer);
+	RECT shapeRect = shape.draw(m_backBuffer);
+	// Push back a copy of the total rect of the shape (needed for clearing the screen)
+	m_shapes.push_back(shapeRect);
 
 	// Restore the state of the backbuffer
 	RestoreDC(m_backBuffer, m_savedDC);

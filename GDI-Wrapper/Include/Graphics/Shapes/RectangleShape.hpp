@@ -29,7 +29,7 @@ public:
 	std::pair<int, int> getSize() const override;
 	RECT getRect() const override;
 
-	void draw(HDC hDC) const override;
+	RECT draw(HDC hDC) const override;
 
 private:
 	const RECT getOutlineRect() const;
