@@ -73,6 +73,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)lib\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>lib\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
@@ -83,6 +84,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)lib\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>lib\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -161,26 +163,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\Export\Export.hpp" />
+    <ClInclude Include="..\include\Graphics\Graphics.hpp" />
+    <ClInclude Include="..\include\Graphics\Shapes\CircleShape.hpp" />
+    <ClInclude Include="..\include\Graphics\Shapes\EllipseShape.hpp" />
+    <ClInclude Include="..\include\Graphics\Shapes\RectangleShape.hpp" />
+    <ClInclude Include="..\include\Graphics\Shapes\Shape.hpp" />
+    <ClInclude Include="..\include\Link.hpp" />
+    <ClInclude Include="..\include\System\Clock.hpp" />
+    <ClInclude Include="..\include\Window\Window.hpp" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="Include\Export\Export.hpp" />
-    <ClInclude Include="Include\Graphics\Graphics.hpp" />
-    <ClInclude Include="Include\Graphics\Shapes\CircleShape.hpp" />
-    <ClInclude Include="Include\Graphics\Shapes\EllipseShape.hpp" />
-    <ClInclude Include="Include\Graphics\Shapes\RectangleShape.hpp" />
-    <ClInclude Include="Include\Graphics\Shapes\Shape.hpp" />
-    <ClInclude Include="Include\Link.hpp" />
-    <ClInclude Include="Include\System\Clock.hpp" />
-    <ClInclude Include="Include\Window\Window.hpp" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\include\Graphics\Graphics.cpp" />
+    <ClCompile Include="..\include\Graphics\Shapes\CircleShape.cpp" />
+    <ClCompile Include="..\include\Graphics\Shapes\EllipseShape.cpp" />
+    <ClCompile Include="..\include\Graphics\Shapes\RectangleShape.cpp" />
+    <ClCompile Include="..\include\System\Clock.cpp" />
+    <ClCompile Include="..\include\Window\Window.cpp" />
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="Include\Graphics\Graphics.cpp" />
-    <ClCompile Include="Include\Graphics\Shapes\CircleShape.cpp" />
-    <ClCompile Include="Include\Graphics\Shapes\EllipseShape.cpp" />
-    <ClCompile Include="Include\Graphics\Shapes\RectangleShape.cpp" />
-    <ClCompile Include="Include\System\Clock.cpp" />
-    <ClCompile Include="Include\Window\Window.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
