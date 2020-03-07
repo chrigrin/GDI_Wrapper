@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Window.hpp"
+#include "Window/Window.hpp"
 
 // Initialize the windowclass at compile time to make the compiler happy
 Window::WindowClass Window::WindowClass::wndClass;

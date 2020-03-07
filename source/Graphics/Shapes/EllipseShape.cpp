@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "EllipseShape.hpp"
+#include "Graphics/Shapes/EllipseShape.hpp"
 
 EllipseShape::EllipseShape()
 	:
