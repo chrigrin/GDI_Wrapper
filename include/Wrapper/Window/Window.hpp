@@ -1,5 +1,6 @@
 #pragma once
-#include "../Export/Export.hpp"
+#include "../GDI-Wrapper/framework.h"
+#include <Wrapper/Export/Export.hpp>
 
 class GDIWRAPPER_API Window
 {

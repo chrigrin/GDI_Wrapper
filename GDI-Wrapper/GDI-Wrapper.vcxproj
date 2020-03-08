@@ -90,7 +90,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
@@ -108,7 +108,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
@@ -157,7 +157,7 @@
       <PreprocessorDefinitions>NDEBUG;GDIWRAPPER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)include;$(SolutionDir)source</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -169,32 +169,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\Export\Export.hpp" />
-    <ClInclude Include="..\include\Graphics\Graphics.hpp" />
-    <ClInclude Include="..\include\Graphics\Shapes\CircleShape.hpp" />
-    <ClInclude Include="..\include\Graphics\Shapes\EllipseShape.hpp" />
-    <ClInclude Include="..\include\Graphics\Shapes\RectangleShape.hpp" />
-    <ClInclude Include="..\include\Graphics\Shapes\Shape.hpp" />
-    <ClInclude Include="..\include\Link.hpp" />
-    <ClInclude Include="..\include\System\Clock.hpp" />
-    <ClInclude Include="..\include\Window\Window.hpp" />
+    <ClInclude Include="..\include\Wrapper\Export\Export.hpp" />
+    <ClInclude Include="..\include\Wrapper\Graphics\Graphics.hpp" />
+    <ClInclude Include="..\include\Wrapper\Graphics\Shapes\CircleShape.hpp" />
+    <ClInclude Include="..\include\Wrapper\Graphics\Shapes\EllipseShape.hpp" />
+    <ClInclude Include="..\include\Wrapper\Graphics\Shapes\RectangleShape.hpp" />
+    <ClInclude Include="..\include\Wrapper\Graphics\Shapes\Shape.hpp" />
+    <ClInclude Include="..\include\Wrapper\Link.hpp" />
+    <ClInclude Include="..\include\Wrapper\System\Clock.hpp" />
+    <ClInclude Include="..\include\Wrapper\Window\Keyboard.hpp" />
+    <ClInclude Include="..\include\Wrapper\Window\Window.hpp" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\Graphics\Graphics.cpp" />
-    <ClCompile Include="..\source\Graphics\Shapes\CircleShape.cpp" />
-    <ClCompile Include="..\source\Graphics\Shapes\EllipseShape.cpp" />
-    <ClCompile Include="..\source\Graphics\Shapes\RectangleShape.cpp" />
-    <ClCompile Include="..\source\System\Clock.cpp" />
-    <ClCompile Include="..\source\Window\Window.cpp" />
+    <ClCompile Include="..\source\Wrapper\Graphics\Graphics.cpp" />
+    <ClCompile Include="..\source\Wrapper\Graphics\Shapes\CircleShape.cpp" />
+    <ClCompile Include="..\source\Wrapper\Graphics\Shapes\EllipseShape.cpp" />
+    <ClCompile Include="..\source\Wrapper\Graphics\Shapes\RectangleShape.cpp" />
+    <ClCompile Include="..\source\Wrapper\System\Clock.cpp" />
+    <ClCompile Include="..\source\Wrapper\Window\Keyboard.cpp" />
+    <ClCompile Include="..\source\Wrapper\Window\Window.cpp" />
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="stdafx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

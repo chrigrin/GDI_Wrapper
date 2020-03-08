@@ -1,5 +1,4 @@
-#include "stdafx.h"
-#include "Graphics/Shapes/CircleShape.hpp"
+#include <Wrapper/Graphics/Shapes/CircleShape.hpp>
 
 CircleShape::CircleShape()
 	:

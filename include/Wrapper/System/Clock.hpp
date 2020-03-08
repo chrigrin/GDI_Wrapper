@@ -1,5 +1,5 @@
 #pragma once
-#include "../Export/Export.hpp"
+#include <Wrapper/Export/Export.hpp>
 #include <chrono>
 
 class GDIWRAPPER_API Clock

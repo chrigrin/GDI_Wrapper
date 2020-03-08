@@ -1,5 +1,4 @@
-#include "stdafx.h"
-#include "Graphics/Shapes/RectangleShape.hpp"
+#include <Wrapper/Graphics/Shapes/RectangleShape.hpp>
 
 RectangleShape::RectangleShape()
 	:

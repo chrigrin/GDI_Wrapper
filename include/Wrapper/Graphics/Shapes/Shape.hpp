@@ -1,5 +1,7 @@
 #pragma once
-#include "../../Export/Export.hpp"
+#include "../GDI-Wrapper/framework.h"
+#include <Wrapper/Export/Export.hpp>
+#include <Windows.h>
 #include <utility>
 
 class GDIWRAPPER_API Shape

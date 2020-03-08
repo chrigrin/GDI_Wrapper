@@ -1,6 +1,7 @@
 #pragma once
-#include "../Export/Export.hpp"
-#include "Shapes/Shape.hpp"
+#include "../GDI-Wrapper/framework.h"
+#include <Wrapper/Export/Export.hpp>
+#include <Wrapper/Graphics/Shapes/Shape.hpp>
 #include <vector>
 
 class GDIWRAPPER_API Graphics

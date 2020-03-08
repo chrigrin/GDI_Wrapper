@@ -1,5 +1,4 @@
-#include "stdafx.h"
-#include "System/Clock.hpp"
+#include <Wrapper/System/Clock.hpp>
 
 Clock::Clock()
 {

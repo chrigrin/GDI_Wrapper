@@ -36,61 +36,61 @@
     <ClInclude Include="framework.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\include\Wrapper\Graphics\Shapes\Shape.hpp">
+      <Filter>Graphics\Shapes</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Export\Export.hpp">
-      <Filter>Export</Filter>
+    <ClInclude Include="..\include\Wrapper\Graphics\Shapes\CircleShape.hpp">
+      <Filter>Graphics\Shapes</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Graphics\Graphics.hpp">
+    <ClInclude Include="..\include\Wrapper\Graphics\Shapes\EllipseShape.hpp">
+      <Filter>Graphics\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Wrapper\Graphics\Shapes\RectangleShape.hpp">
+      <Filter>Graphics\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Wrapper\Graphics\Graphics.hpp">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Graphics\Shapes\CircleShape.hpp">
-      <Filter>Graphics\Shapes</Filter>
+    <ClInclude Include="..\include\Wrapper\Export\Export.hpp">
+      <Filter>Export</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Graphics\Shapes\EllipseShape.hpp">
-      <Filter>Graphics\Shapes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Graphics\Shapes\RectangleShape.hpp">
-      <Filter>Graphics\Shapes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Graphics\Shapes\Shape.hpp">
-      <Filter>Graphics\Shapes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Link.hpp">
-      <Filter>Link Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\System\Clock.hpp">
+    <ClInclude Include="..\include\Wrapper\System\Clock.hpp">
       <Filter>System</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Window\Window.hpp">
+    <ClInclude Include="..\include\Wrapper\Window\Keyboard.hpp">
       <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Wrapper\Window\Window.hpp">
+      <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Wrapper\Link.hpp">
+      <Filter>Link Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\source\Wrapper\Graphics\Shapes\CircleShape.cpp">
+      <Filter>Graphics\Shapes</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\Window\Window.cpp">
-      <Filter>Window</Filter>
+    <ClCompile Include="..\source\Wrapper\Graphics\Shapes\EllipseShape.cpp">
+      <Filter>Graphics\Shapes</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\System\Clock.cpp">
+    <ClCompile Include="..\source\Wrapper\Graphics\Shapes\RectangleShape.cpp">
+      <Filter>Graphics\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Wrapper\System\Clock.cpp">
       <Filter>System</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\Graphics\Graphics.cpp">
+    <ClCompile Include="..\source\Wrapper\Window\Window.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Wrapper\Window\Keyboard.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Wrapper\Graphics\Graphics.cpp">
       <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\Graphics\Shapes\CircleShape.cpp">
-      <Filter>Graphics\Shapes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\Graphics\Shapes\EllipseShape.cpp">
-      <Filter>Graphics\Shapes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\Graphics\Shapes\RectangleShape.cpp">
-      <Filter>Graphics\Shapes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

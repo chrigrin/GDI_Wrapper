@@ -1,5 +1,4 @@
-#include "stdafx.h"
-#include "Graphics/Graphics.hpp"
+#include <Wrapper/Graphics/Graphics.hpp>
 
 Graphics::Graphics(HWND hWnd)
 	:
