@@ -3,36 +3,38 @@
 
 RectangleShape::RectangleShape()
 	:
-	m_outlineThickness(0)
+	RectangleShape(0, 0, 0, 0)
 {
-	m_fillColor = RGB(255, 255, 255);
-	m_outlineColor = RGB(0, 0, 0);
 }
 
 RectangleShape::RectangleShape(int width, int height)
 	:
-	m_width(width),
-	m_height(height)
+	RectangleShape(0, 0, width, height)
 {
-	RectangleShape();
 }
 
-RectangleShape::RectangleShape(std::pair<int, int> size)
-{
-	RectangleShape(size.first, size.second);
-}
-
-RectangleShape::RectangleShape(int x, int y, int width, int height)
+RectangleShape::RectangleShape(std::pair<int, int> size) 
 	:
-	m_x(x),
-	m_y(y)
+	RectangleShape(0,0, size.first, size.second)
 {
-	RectangleShape(width, height);
+}
+
+RectangleShape::RectangleShape(int x, int y, int width, int height) 
+	:
+	m_width(width), 
+	m_height(height),
+	m_x(x),
+	m_y(y),
+	m_outlineThickness(0),
+	m_fillColor(RGB(255, 255, 255)),
+	m_outlineColor(RGB(0, 0, 0))
+{
 }
 
 RectangleShape::RectangleShape(std::pair<int, int> pos, std::pair<int, int> size)
+	:
+	RectangleShape(pos.first, pos.second, size.first, size.second)
 {
-	RectangleShape(pos.first, pos.second, size.first, size.second);
 }
 
 RectangleShape::RectangleShape(RECT rect)

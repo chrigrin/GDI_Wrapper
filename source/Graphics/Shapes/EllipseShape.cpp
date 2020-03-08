@@ -3,44 +3,44 @@
 
 EllipseShape::EllipseShape()
 	:
-	m_fillColor(RGB(255, 255, 255)),
-	m_outlineColor(RGB(0, 0, 0))
+	EllipseShape(0, 0, 0, 0)
 {
 }
 
 EllipseShape::EllipseShape(int width, int height)
 	:
-	m_width(width),
-	m_height(height)
+	EllipseShape(0, 0, width, height)
 {
-	EllipseShape();
 }
 
 EllipseShape::EllipseShape(std::pair<int, int> size)
-{
-	EllipseShape(size.first, size.second);
-}
-
-EllipseShape::EllipseShape(int width, int height, int x, int y)
 	:
-	m_x(x),
-	m_y(y)
+	EllipseShape(0, 0, size.first, size.second)
 {
-	EllipseShape(width, height);
 }
 
-EllipseShape::EllipseShape(std::pair<int, int> size, std::pair<int, int> pos)
+EllipseShape::EllipseShape(int x, int y, int width, int height)
+	:
+	m_width(width),
+	m_height(height),
+	m_x(x),
+	m_y(y),
+	m_outlineThickness(0),
+	m_fillColor(RGB(255, 255, 255)),
+	m_outlineColor(RGB(0, 0, 0))
 {
-	EllipseShape(size.first, size.second, pos.first, pos.second);
+}
+
+EllipseShape::EllipseShape(std::pair<int, int> pos, std::pair<int, int> size)
+	:
+	EllipseShape(pos.first, pos.second, size.first, size.second)
+{
 }
 
 EllipseShape::EllipseShape(RECT rect)
+	:
+	EllipseShape(rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top)
 {
-	int width, height;
-	width = rect.right - rect.left;
-	height = rect.bottom - rect.top;
-
-	EllipseShape(rect.left, rect.top, width, height);
 }
 
 void EllipseShape::setFillColor(unsigned char r, unsigned char g, unsigned char b)

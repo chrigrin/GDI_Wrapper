@@ -6,8 +6,8 @@ class GDIWRAPPER_API CircleShape : public EllipseShape
 public:
 	CircleShape();
 	CircleShape(double radius);
-	CircleShape(double radius, int x, int y);
-	CircleShape(double radius, std::pair<int, int> pos);
+	CircleShape(int x, int y, double radius);
+	CircleShape(std::pair<int, int> pos, double radius);
 
 	void setRadius(double radius);
 
