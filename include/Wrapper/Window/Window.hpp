@@ -34,5 +34,5 @@ private:
 
 private:
 	HWND m_hWnd;
-	PAINTSTRUCT ps;
+	PAINTSTRUCT m_ps;
 };

@@ -2,7 +2,8 @@
 
 Graphics::Graphics(HWND hWnd)
 	:
-	m_hWnd(hWnd)
+	m_hWnd(hWnd),
+	m_savedDC(0)
 {
 	// Retrieve the client rect
 	GetClientRect(hWnd, &m_clientRect);

@@ -44,6 +44,8 @@ Window::WindowClass::~WindowClass()
 }
 
 Window::Window()
+	:
+	m_ps{ 0 }
 {
 	// Create a window and store a pointer to this class in the lpParam
 	m_hWnd = CreateWindow(WindowClass::getName(), L"Desktop", WS_MINIMIZEBOX | WS_SYSMENU,
@@ -107,9 +109,9 @@ LRESULT Window::handleMessage(HWND m_hWnd, UINT msg, WPARAM wParam, LPARAM lPara
 		break;
 	case WM_PAINT:
 	{
-		BeginPaint(m_hWnd, &ps);
+		BeginPaint(m_hWnd, &m_ps);
 
-		EndPaint(m_hWnd, &ps);
+		EndPaint(m_hWnd, &m_ps);
 	}
 	break;
 	case WM_KEYDOWN:

@@ -37,12 +37,9 @@ RectangleShape::RectangleShape(std::pair<int, int> pos, std::pair<int, int> size
 }
 
 RectangleShape::RectangleShape(RECT rect)
+	:
+	RectangleShape(rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top)
 {
-	int width, height;
-	width = rect.right - rect.left;
-	height = rect.bottom - rect.top;
-
-	RectangleShape(rect.left, rect.top, width, height);
 }
 
 RectangleShape::~RectangleShape()
