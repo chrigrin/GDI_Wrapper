@@ -53,6 +53,8 @@ Window::Window()
 
 	// Show the window
 	ShowWindow(m_hWnd, SW_SHOWDEFAULT);
+
+	GetMessage(&m_msg, nullptr, 0, 0);
 }
 
 Window::~Window()
@@ -63,6 +65,27 @@ Window::~Window()
 HWND Window::getWindowHandle() const
 {
 	return m_hWnd;
+}
+
+bool Window::isOpen() const
+{
+	return m_msg.message != WM_QUIT;
+}
+
+bool Window::processMessage()
+{
+	if (PeekMessageW(&m_msg, nullptr, 0, 0, PM_REMOVE))
+	{
+		TranslateMessage(&m_msg);
+		DispatchMessage(&m_msg);
+		return true;
+	}
+	return false;
+}
+
+int Window::getQuitMessage() const
+{
+	return static_cast<int>(m_msg.wParam);
 }
 
 LRESULT Window::handleMessageSetup(HWND m_hWnd, UINT msg, WPARAM wParam, LPARAM lParam)

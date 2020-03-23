@@ -59,36 +59,27 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		myShapes.push_back(std::move(circle));
 	}
 
-	MSG msg;
-	GetMessage(&msg, nullptr, 0, 0);
-
     // Main message loop:
-    while (msg.message != WM_QUIT)
+    while (someWindow.isOpen())
     {
-        if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
-        {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
-        }
-		else
-		{
-			dt = clock.getElapsedTime();
+		someWindow.processMessage();
 
-			gfx.clear();
-			
-			myEllipse->move(0, 1);
+		dt = clock.getElapsedTime();
 
-			for (const auto &shape : myShapes)
-				gfx.draw(*shape);
+		gfx.clear();
+		
+		myEllipse->move(0, 1);
 
-			gfx.display();
+		for (const auto &shape : myShapes)
+			gfx.draw(*shape);
 
-			std::wstring wstr = std::to_wstring(dt);
-			SetWindowText(someWindow.getWindowHandle(), wstr.c_str());
-			//rect.move(1, 0);
-			//ellipse.move(0, 1);
-		}
+		gfx.display();
+
+		std::wstring wstr = std::to_wstring(dt);
+		SetWindowText(someWindow.getWindowHandle(), wstr.c_str());
+		//rect.move(1, 0);
+		//ellipse.move(0, 1);
     }
 
-    return (int) msg.wParam;
+    return someWindow.getQuitMessage();
 }

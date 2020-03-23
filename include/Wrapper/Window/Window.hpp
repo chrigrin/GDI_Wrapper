@@ -27,6 +27,13 @@ public:
 
 	HWND getWindowHandle() const;
 
+	bool isOpen() const;
+
+	// Needed to handle any messages to the window
+	bool processMessage();
+
+	int getQuitMessage() const;
+
 private:
 	static LRESULT CALLBACK handleMessageSetup(HWND m_hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 	static LRESULT CALLBACK handleMessageThunk(HWND m_hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -35,4 +42,5 @@ private:
 private:
 	HWND m_hWnd;
 	PAINTSTRUCT m_ps;
+	MSG m_msg;
 };
