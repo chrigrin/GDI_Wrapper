@@ -10,7 +10,7 @@ public:
 	Graphics(HWND hWnd);
 	~Graphics();
 
-	void clear();
+	void clear(unsigned char r, unsigned char g, unsigned char b);
 	void display() const;
 
 	void draw(const Shape &shape);

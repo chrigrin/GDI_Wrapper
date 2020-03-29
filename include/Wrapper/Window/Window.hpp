@@ -32,12 +32,12 @@ public:
 	// Needed to handle any messages to the window
 	bool processMessage();
 
-	int getQuitMessage() const;
+	WPARAM getWParam() const;
 
 private:
-	static LRESULT CALLBACK handleMessageSetup(HWND m_hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-	static LRESULT CALLBACK handleMessageThunk(HWND m_hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-	LRESULT CALLBACK handleMessage(HWND m_hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+	static LRESULT CALLBACK handleMessageSetup(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+	static LRESULT CALLBACK handleMessageThunk(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+	LRESULT CALLBACK handleMessage(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 private:
 	HWND m_hWnd;
