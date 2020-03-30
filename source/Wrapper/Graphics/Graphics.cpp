@@ -37,16 +37,13 @@ Graphics::~Graphics()
 	DeleteDC(m_backBuffer);
 }
 
+void Graphics::clear(COLORREF color)
+{
+}
+
 void Graphics::clear(unsigned char r, unsigned char g, unsigned char b)
 {
-	// Check if there are any objects not cleared
-	while (m_shapes.size() > 0)
-	{
-		// Draw a black rectangle over the last object in the vector
-		FillRect(m_backBuffer, &m_shapes.back(), CreateSolidBrush(RGB(r, g, b)));
-		// Pop the last object in the vector
-		m_shapes.pop_back();
-	}
+	clear(RGB(r, g, b));
 }
 
 void Graphics::display() const

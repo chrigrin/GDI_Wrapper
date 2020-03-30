@@ -10,6 +10,7 @@ public:
 	Graphics(HWND hWnd);
 	~Graphics();
 
+	void clear(COLORREF color);
 	void clear(unsigned char r, unsigned char g, unsigned char b);
 	void display() const;
 
