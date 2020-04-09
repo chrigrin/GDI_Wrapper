@@ -39,6 +39,12 @@ Graphics::~Graphics()
 
 void Graphics::clear(COLORREF color)
 {
+	RECT clientRect;
+	GetClientRect(m_hWnd, &clientRect);
+
+	auto brush = CreateSolidBrush(color);
+	FillRect(m_backBuffer, &clientRect, brush);
+	DeleteObject(static_cast<HGDIOBJ>(brush));
 }
 
 void Graphics::clear(unsigned char r, unsigned char g, unsigned char b)
@@ -59,15 +65,12 @@ void Graphics::display() const
 	ReleaseDC(m_hWnd, wndDC);
 }
 
-void Graphics::draw(const Shape & shape)
+void Graphics::draw(const Shape &shape)
 {
 	// Save the state of the backbuffer (Pens, brushes, etc.)
 	m_savedDC = SaveDC(m_backBuffer);
 
-	// Draw the shape to the backbuffer
-	RECT shapeRect = shape.draw(m_backBuffer);
-	// Push back a copy of the total rect of the shape (needed for clearing the screen)
-	m_shapes.push_back(shapeRect);
+	shape.draw(m_backBuffer);
 
 	// Restore the state of the backbuffer
 	RestoreDC(m_backBuffer, m_savedDC);

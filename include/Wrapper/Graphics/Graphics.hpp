@@ -3,12 +3,16 @@
 #include <Wrapper/Export/Export.hpp>
 #include <Wrapper/Graphics/Shapes/Shape.hpp>
 #include <vector>
+#include <memory>
 
 class GDIWRAPPER_API Graphics
 {
 public:
 	Graphics(HWND hWnd);
 	~Graphics();
+
+	Graphics(const Graphics&) = delete;
+	Graphics operator=(const Graphics&) = delete;
 
 	void clear(COLORREF color);
 	void clear(unsigned char r, unsigned char g, unsigned char b);
@@ -23,5 +27,4 @@ private:
 	int m_savedDC;
 	HBITMAP m_hBmp, m_hBmpOld;
 	RECT m_clientRect;
-	std::vector<RECT> m_shapes;
 };

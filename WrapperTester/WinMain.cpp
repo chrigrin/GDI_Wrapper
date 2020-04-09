@@ -6,8 +6,26 @@
 #include <vector>
 #include <algorithm>
 
-// Global Variables:
-HWND hMainWnd;
+namespace {
+
+	class BrushGuard
+	{
+		HBRUSH m_brush;
+
+	public:
+		BrushGuard(HBRUSH brush) : m_brush(brush) {}
+
+		~BrushGuard()
+		{
+			DeleteObject(static_cast<HGDIOBJ>(m_brush));
+		}
+
+		HBRUSH get() const
+		{
+			return m_brush;
+		}
+	};
+}
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -39,6 +57,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	EllipseShape *myEllipse = nullptr;
 	{
 		auto ellipse = std::make_unique<EllipseShape>();
+
 		ellipse->setSize(200, 100);
 		ellipse->setPosition(500, 0);
 		ellipse->setFillColor(0, 255, 255);
@@ -66,14 +85,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		dt = clock.getElapsedTime();
 
-		gfx.clear();
-		
-		myEllipse->move(0, 1);
+		gfx.clear(0, 0, 0);
 
-		for (const auto &shape : myShapes)
-			gfx.draw(*shape);
+		for (auto &shape : myShapes)
+		{
+			gfx.draw((*shape.get()));
+		}
 
 		gfx.display();
+
+		myEllipse->move(1, 1);
 
 		std::wstring wstr = std::to_wstring(dt);
 		SetWindowText(someWindow.getWindowHandle(), wstr.c_str());
@@ -81,5 +102,5 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		//ellipse.move(0, 1);
     }
 
-    return someWindow.getQuitMessage();
+	return static_cast<int>(someWindow.getWParam());
 }

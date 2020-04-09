@@ -14,21 +14,23 @@ public:
 	virtual void setOutlineColor(unsigned char r, unsigned char g, unsigned char b) = 0;
 	virtual void setOutlineThickness(int outlineThickness) = 0;
 
-	virtual void setPosition(int x, int y) = 0;
-	virtual void setPosition(std::pair<int, int> pos) = 0;
-	virtual void setSize(int x, int y) = 0;
-	virtual void setSize(std::pair<int, int> size) = 0;
+	virtual void setPosition(double x, double y) = 0;
+	virtual void setPosition(std::pair<double, double> pos) = 0;
+	virtual void setSize(double x, double y) = 0;
+	virtual void setSize(std::pair<double, double> size) = 0;
 	virtual void setRect(RECT rect) = 0;
 
-	virtual void move(int x, const int y) = 0;
-	virtual void move(std::pair<int, int> distance) = 0;
+	virtual void move(double x, double y) = 0;
+	virtual void move(std::pair<double, double> distance) = 0;
 
-	virtual std::pair<int, int> getPosition() const = 0;
-	virtual std::pair<int, int> getSize() const = 0;
+	virtual std::pair<double, double> getPosition() const = 0;
+	virtual std::pair<double, double> getSize() const = 0;
 	virtual RECT getRect() const = 0;
+	virtual RECT getTotalRect() const = 0;
 
-	virtual RECT draw(HDC hDC) const = 0;
+	virtual void draw(HDC hDC) const = 0;
 
 protected:
+	virtual RECT getOutlinedRect(RECT rect) const = 0;
 	virtual void drawOutline(HDC hDC, RECT outlineRect) const = 0;
 };

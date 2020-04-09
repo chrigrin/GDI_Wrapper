@@ -6,19 +6,19 @@ EllipseShape::EllipseShape()
 {
 }
 
-EllipseShape::EllipseShape(int width, int height)
+EllipseShape::EllipseShape(double width, double height)
 	:
 	EllipseShape(0, 0, width, height)
 {
 }
 
-EllipseShape::EllipseShape(std::pair<int, int> size)
+EllipseShape::EllipseShape(std::pair<double, double> size)
 	:
 	EllipseShape(0, 0, size.first, size.second)
 {
 }
 
-EllipseShape::EllipseShape(int x, int y, int width, int height)
+EllipseShape::EllipseShape(double x, double y, double width, double height)
 	:
 	m_width(width),
 	m_height(height),
@@ -30,7 +30,7 @@ EllipseShape::EllipseShape(int x, int y, int width, int height)
 {
 }
 
-EllipseShape::EllipseShape(std::pair<int, int> pos, std::pair<int, int> size)
+EllipseShape::EllipseShape(std::pair<double, double> pos, std::pair<double, double> size)
 	:
 	EllipseShape(pos.first, pos.second, size.first, size.second)
 {
@@ -38,7 +38,10 @@ EllipseShape::EllipseShape(std::pair<int, int> pos, std::pair<int, int> size)
 
 EllipseShape::EllipseShape(RECT rect)
 	:
-	EllipseShape(rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top)
+	EllipseShape(rect.left,
+		rect.top,
+		static_cast<double>(rect.right) - static_cast<double>(rect.left),
+		static_cast<double>(rect.bottom) - static_cast<double>(rect.top))
 {
 }
 
@@ -57,24 +60,24 @@ void EllipseShape::setOutlineThickness(int outlineThickness)
 	m_outlineThickness = outlineThickness;
 }
 
-void EllipseShape::setPosition(int x, int y)
+void EllipseShape::setPosition(double x, double y)
 {
 	m_x = x;
 	m_y = y;
 }
 
-void EllipseShape::setPosition(std::pair<int, int> pos)
+void EllipseShape::setPosition(std::pair<double, double> pos)
 {
 	setPosition(pos.first, pos.second);
 }
 
-void EllipseShape::setSize(int width, int height)
+void EllipseShape::setSize(double width, double height)
 {
 	m_width = width;
 	m_height = height;
 }
 
-void EllipseShape::setSize(std::pair<int, int> size)
+void EllipseShape::setSize(std::pair<double, double> size)
 {
 	setSize(size.first, size.second);
 }
@@ -89,38 +92,55 @@ void EllipseShape::setRect(RECT rect)
 	setSize(width, height);
 }
 
-void EllipseShape::move(int x, int y)
+void EllipseShape::move(double x, double y)
 {
 	m_x += x;
 	m_y += y;
 }
 
-void EllipseShape::move(std::pair<int, int> distance)
+void EllipseShape::move(std::pair<double, double> distance)
 {
 	move(distance.first, distance.second);
 }
 
-std::pair<int, int> EllipseShape::getPosition() const
+std::pair<double, double> EllipseShape::getPosition() const
 {
-	return std::pair<int, int>(m_x, m_y);
+	return std::pair<double, double>(m_x, m_y);
 }
 
-std::pair<int, int> EllipseShape::getSize() const
+std::pair<double, double> EllipseShape::getSize() const
 {
-	return std::pair<int, int>(m_width, m_height);
+	return std::pair<double, double>(m_width, m_height);
 }
 
 RECT EllipseShape::getRect() const
 {
-	RECT rect;
-	int width, height;
-	width = m_x + m_width;
-	height = m_y + m_height;
-	SetRect(&rect, m_x, m_y, width, height);
-	return rect;
+	return RECT{	
+		static_cast<LONG>(m_x), 
+		static_cast<LONG>(m_y), 
+		static_cast<LONG>(m_x + m_width), 
+		static_cast<LONG>(m_y + m_height) 
+	};
 }
 
-RECT EllipseShape::draw(HDC hDC) const
+RECT EllipseShape::getTotalRect() const
+{
+	RECT rect = getRect();
+	RECT outlineRect = getOutlinedRect(rect);
+	RECT totalRect = getOutlinedRect(outlineRect);
+
+	if (m_outlineThickness % 2)
+	{
+		totalRect.left -= 1;
+		totalRect.top -= 1;
+		totalRect.right += 1;
+		totalRect.bottom += 1;
+	}
+
+	return totalRect;
+}
+
+void EllipseShape::draw(HDC hDC) const
 {
 	// Retrieve the ellipse's rectangle (used in the drawing function)
 	RECT ellipseRect = getRect();
@@ -134,23 +154,8 @@ RECT EllipseShape::draw(HDC hDC) const
 	// Draw an outline if it is specified
 	if (m_outlineThickness != 0)
 	{
-		RECT outlineRect = getOutlineRect();
+		RECT outlineRect = getOutlinedRect(ellipseRect);
 		drawOutline(hDC, outlineRect);
-
-		// Return the outlineRect to be able to clear the outline every frame
-		// Add a pixel in evry direction to be sure to clear the outline too
-		// The getOutline() function is only semi good, and returns a pixel too small
-		// to be there are no gaps between the circle and the outline
-		outlineRect.left -= 1;
-		outlineRect.top -= 1;
-		outlineRect.right += 1;
-		outlineRect.bottom += 1;
-		return outlineRect;
-	}
-	else
-	{
-		// Return the ellipseRect when there is no outline
-		return ellipseRect;
 	}
 }
 
@@ -191,9 +196,9 @@ void EllipseShape::drawOutline(HDC hDC, RECT outlineRect) const
 	////////////////////////////////////////////
 }
 
-RECT EllipseShape::getOutlineRect() const
+RECT EllipseShape::getOutlinedRect(RECT rect) const
 {
-	RECT outlineRect = getRect();
+	RECT outlineRect = rect;
 	int offset = 0;
 
 	// Only semi good solution. Framing a circle without overlapping the

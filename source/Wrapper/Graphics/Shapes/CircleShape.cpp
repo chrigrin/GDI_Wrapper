@@ -12,14 +12,14 @@ CircleShape::CircleShape(double radius)
 {
 }
 
-CircleShape::CircleShape(int x, int y, double radius)
+CircleShape::CircleShape(double x, double y, double radius)
 	:
-	EllipseShape(x, y, static_cast<int>(radius * 2), static_cast<int>(radius * 2)),
+	EllipseShape(x, y, radius * 2, radius * 2),
 	m_radius(radius)
 {
 }
 
-CircleShape::CircleShape(std::pair<int, int> pos, double radius)
+CircleShape::CircleShape(std::pair<double, double> pos, double radius)
 	:
 	CircleShape(pos.first, pos.second, radius)
 {
@@ -28,9 +28,9 @@ CircleShape::CircleShape(std::pair<int, int> pos, double radius)
 void CircleShape::setRadius(double radius)
 {
 	m_radius = radius;
-	int width, height;
-	width = static_cast<int>(radius * 2);
-	height = static_cast<int>(radius * 2);
+	double width, height;
+	width = radius * 2;
+	height = radius * 2;
 
 	EllipseShape::setSize(width, height);
 }

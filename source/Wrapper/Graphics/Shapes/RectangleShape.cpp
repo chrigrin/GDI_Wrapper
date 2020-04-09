@@ -6,19 +6,19 @@ RectangleShape::RectangleShape()
 {
 }
 
-RectangleShape::RectangleShape(int width, int height)
+RectangleShape::RectangleShape(double width, double height)
 	:
 	RectangleShape(0, 0, width, height)
 {
 }
 
-RectangleShape::RectangleShape(std::pair<int, int> size) 
+RectangleShape::RectangleShape(std::pair<double, double> size)
 	:
 	RectangleShape(0,0, size.first, size.second)
 {
 }
 
-RectangleShape::RectangleShape(int x, int y, int width, int height) 
+RectangleShape::RectangleShape(double x, double y, double width, double height)
 	:
 	m_width(width), 
 	m_height(height),
@@ -30,7 +30,7 @@ RectangleShape::RectangleShape(int x, int y, int width, int height)
 {
 }
 
-RectangleShape::RectangleShape(std::pair<int, int> pos, std::pair<int, int> size)
+RectangleShape::RectangleShape(std::pair<double, double> pos, std::pair<double, double> size)
 	:
 	RectangleShape(pos.first, pos.second, size.first, size.second)
 {
@@ -38,7 +38,10 @@ RectangleShape::RectangleShape(std::pair<int, int> pos, std::pair<int, int> size
 
 RectangleShape::RectangleShape(RECT rect)
 	:
-	RectangleShape(rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top)
+	RectangleShape(rect.left,
+		rect.top,
+		static_cast<double>(rect.right) - static_cast<double>(rect.left),
+		static_cast<double>(rect.bottom) - static_cast<double>(rect.top))
 {
 }
 
@@ -61,24 +64,24 @@ void RectangleShape::setOutlineThickness(int outlineThickness)
 	m_outlineThickness = outlineThickness;
 }
 
-void RectangleShape::setPosition(int x, int y)
+void RectangleShape::setPosition(double x, double y)
 {
 	m_x = x;
 	m_y = y;
 }
 
-void RectangleShape::setPosition(std::pair<int, int> pos)
+void RectangleShape::setPosition(std::pair<double, double> pos)
 {
 	setPosition(pos.first, pos.second);
 }
 
-void RectangleShape::setSize(int width, int height)
+void RectangleShape::setSize(double width, double height)
 {
 	m_width = width;
 	m_height = height;
 }
 
-void RectangleShape::setSize(std::pair<int, int> size)
+void RectangleShape::setSize(std::pair<double, double> size)
 {
 	setSize(size.first, size.second);
 }
@@ -93,38 +96,55 @@ void RectangleShape::setRect(RECT rect)
 	setSize(width, height);
 }
 
-void RectangleShape::move(int x, int y)
+void RectangleShape::move(double x, double y)
 {
 	m_x += x;
 	m_y += y;
 }
 
-void RectangleShape::move(std::pair<int, int> distance)
+void RectangleShape::move(std::pair<double, double> distance)
 {
 	move(distance.first, distance.second);
 }
 
-std::pair<int, int> RectangleShape::getPosition() const
+std::pair<double, double> RectangleShape::getPosition() const
 {
-	return std::pair<int, int>(m_x, m_y);
+	return std::pair<double, double>(m_x, m_y);
 }
 
-std::pair<int, int> RectangleShape::getSize() const
+std::pair<double, double> RectangleShape::getSize() const
 {
-	return std::pair<int, int>(m_width, m_height);
+	return std::pair<double, double>(m_width, m_height);
 }
 
 RECT RectangleShape::getRect() const
 {
-	RECT rect;
-	int width, height;
-	width = m_x + m_width;
-	height = m_y + m_height;
-	SetRect(&rect, m_x, m_y, width, height);
-	return rect;
+	return RECT{
+		static_cast<LONG>(m_x),
+		static_cast<LONG>(m_y),
+		static_cast<LONG>(m_x + m_width),
+		static_cast<LONG>(m_y + m_height)
+	};
 }
 
-RECT RectangleShape::draw(HDC hDC) const
+RECT RectangleShape::getTotalRect() const
+{
+	RECT rect = getRect();
+	RECT outlineRect = getOutlinedRect(rect);
+	RECT totalRect = getOutlinedRect(outlineRect);
+
+	if (m_outlineThickness % 2 == 0)
+	{
+		totalRect.left -= 1;
+		totalRect.top -= 1;
+		totalRect.right += 1;
+		totalRect.bottom += 1;
+	}
+
+	return totalRect;
+}
+
+void RectangleShape::draw(HDC hDC) const
 {
 	// Retrieve the rectangle to draw
 	RECT rect = getRect();
@@ -149,23 +169,15 @@ RECT RectangleShape::draw(HDC hDC) const
 	// If an outline is specified create a an outline for the rectangle
 	if (m_outlineThickness != 0)
 	{
-		RECT outlineRect = getOutlineRect();
+		RECT outlineRect = getOutlinedRect(rect);
 		drawOutline(hDC, outlineRect);
-
-		// Return the outlineRect to be able to clear the outline every frame
-		return outlineRect;
-	}
-	else
-	{
-		// Return the rect when there is no outline
-		return rect;
 	}
 }
 
-const RECT RectangleShape::getOutlineRect() const
+RECT RectangleShape::getOutlinedRect(RECT rect) const
 {
 	// Retrieve the rectangle to be outlined
-	RECT outlineRect = getRect();
+	RECT outlinedRect = rect;
 
 	int offset = 0;
 	if (m_outlineThickness == int(1 || -1))
@@ -173,31 +185,31 @@ const RECT RectangleShape::getOutlineRect() const
 		// (1 / 2) of an int would be 0, therefore set the offset
 		// to the outlineThickness
 		offset = m_outlineThickness;
-		outlineRect.left -= offset;
-		outlineRect.top -= offset;
-		outlineRect.right += offset;
-		outlineRect.bottom += offset;
+		outlinedRect.left -= offset;
+		outlinedRect.top -= offset;
+		outlinedRect.right += offset;
+		outlinedRect.bottom += offset;
 	}
 	else
 	{
 		offset = m_outlineThickness / 2;
-		outlineRect.right += (offset + 1);
-		outlineRect.bottom += (offset + 1);
+		outlinedRect.right += (offset + 1);
+		outlinedRect.bottom += (offset + 1);
 
 		// Odd numbers
 		if (m_outlineThickness % 2)
 		{
-			outlineRect.left -= (offset + 1);
-			outlineRect.top -= (offset + 1);
+			outlinedRect.left -= (offset + 1);
+			outlinedRect.top -= (offset + 1);
 		}
 		// Even numbers
 		else
 		{
-			outlineRect.left -= offset;
-			outlineRect.top -= offset;
+			outlinedRect.left -= offset;
+			outlinedRect.top -= offset;
 		}
 	}
-	return outlineRect;
+	return outlinedRect;
 }
 
 void RectangleShape::drawOutline(HDC hDC, RECT outlineRect) const
