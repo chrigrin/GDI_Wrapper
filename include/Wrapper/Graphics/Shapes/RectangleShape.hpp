@@ -12,8 +12,8 @@ public:
 	RectangleShape(RECT rect);
 	virtual ~RectangleShape();
 
-	void setFillColor(unsigned char r, unsigned char g, unsigned char b) override;
-	void setOutlineColor(unsigned char r, unsigned char g, unsigned char b) override;
+	void setFillColor(Color color) override;
+	void setOutlineColor(Color color) override;
 	void setOutlineThickness(int outlineThickness) override;
 
 	void setPosition(double x, double y) override;

@@ -1,6 +1,7 @@
 #pragma once
 #include "../GDI-Wrapper/framework.h"
 #include <Wrapper/Export/Export.hpp>
+#include <Wrapper/Graphics/Color.hpp>
 #include <Windows.h>
 #include <utility>
 
@@ -10,8 +11,8 @@ public:
 	Shape() = default;
 	virtual ~Shape() = default;
 
-	virtual void setFillColor(unsigned char r, unsigned char g, unsigned char b) = 0;
-	virtual void setOutlineColor(unsigned char r, unsigned char g, unsigned char b) = 0;
+	virtual void setFillColor(Color color) = 0;
+	virtual void setOutlineColor(Color color) = 0;
 	virtual void setOutlineThickness(int outlineThickness) = 0;
 
 	virtual void setPosition(double x, double y) = 0;

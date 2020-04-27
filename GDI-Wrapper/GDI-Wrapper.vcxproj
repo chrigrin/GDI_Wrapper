@@ -170,6 +170,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Wrapper\Export\Export.hpp" />
+    <ClInclude Include="..\include\Wrapper\Graphics\Color.hpp" />
     <ClInclude Include="..\include\Wrapper\Graphics\Graphics.hpp" />
     <ClInclude Include="..\include\Wrapper\Graphics\Shapes\CircleShape.hpp" />
     <ClInclude Include="..\include\Wrapper\Graphics\Shapes\EllipseShape.hpp" />
@@ -182,6 +183,7 @@
     <ClInclude Include="framework.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\source\Wrapper\Graphics\Color.cpp" />
     <ClCompile Include="..\source\Wrapper\Graphics\Graphics.cpp" />
     <ClCompile Include="..\source\Wrapper\Graphics\Shapes\CircleShape.cpp" />
     <ClCompile Include="..\source\Wrapper\Graphics\Shapes\EllipseShape.cpp" />

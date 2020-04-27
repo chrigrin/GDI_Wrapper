@@ -47,9 +47,9 @@ void Graphics::clear(COLORREF color)
 	DeleteObject(static_cast<HGDIOBJ>(brush));
 }
 
-void Graphics::clear(unsigned char r, unsigned char g, unsigned char b)
+void Graphics::clear(Color color)
 {
-	clear(RGB(r, g, b));
+	clear(RGB(color.r, color.g, color.b));
 }
 
 void Graphics::display() const

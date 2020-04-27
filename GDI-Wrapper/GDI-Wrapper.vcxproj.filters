@@ -66,6 +66,9 @@
     <ClInclude Include="..\include\Wrapper\Link.hpp">
       <Filter>Link Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Wrapper\Graphics\Color.hpp">
+      <Filter>Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -90,6 +93,9 @@
       <Filter>Window</Filter>
     </ClCompile>
     <ClCompile Include="..\source\Wrapper\Graphics\Graphics.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Wrapper\Graphics\Color.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
   </ItemGroup>

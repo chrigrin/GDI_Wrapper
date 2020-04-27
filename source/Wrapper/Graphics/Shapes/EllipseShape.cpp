@@ -45,14 +45,14 @@ EllipseShape::EllipseShape(RECT rect)
 {
 }
 
-void EllipseShape::setFillColor(unsigned char r, unsigned char g, unsigned char b)
+void EllipseShape::setFillColor(Color color)
 {
-	m_fillColor = RGB(r, g, b);
+	m_fillColor = RGB(color.r, color.g, color.b);
 }
 
-void EllipseShape::setOutlineColor(unsigned char r, unsigned char g, unsigned char b)
+void EllipseShape::setOutlineColor(Color color)
 {
-	m_outlineColor = RGB(r, g, b);
+	m_outlineColor = RGB(color.r, color.g, color.b);
 }
 
 void EllipseShape::setOutlineThickness(int outlineThickness)

@@ -49,14 +49,14 @@ RectangleShape::~RectangleShape()
 {
 }
 
-void RectangleShape::setFillColor(unsigned char r, unsigned char g, unsigned char b)
+void RectangleShape::setFillColor(Color color)
 {
-	m_fillColor = RGB(r, g, b);
+	m_fillColor = RGB(color.r, color.g, color.b);
 }
 
-void RectangleShape::setOutlineColor(unsigned char r, unsigned char g, unsigned char b)
+void RectangleShape::setOutlineColor(Color color)
 {
-	m_outlineColor = RGB(r, g, b);
+	m_outlineColor = RGB(color.r, color.g, color.b);
 }
 
 void RectangleShape::setOutlineThickness(int outlineThickness)

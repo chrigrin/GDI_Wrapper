@@ -2,6 +2,7 @@
 #include "../GDI-Wrapper/framework.h"
 #include <Wrapper/Export/Export.hpp>
 #include <Wrapper/Graphics/Shapes/Shape.hpp>
+#include "Color.hpp"
 #include <vector>
 #include <memory>
 
@@ -15,7 +16,7 @@ public:
 	Graphics operator=(const Graphics&) = delete;
 
 	void clear(COLORREF color);
-	void clear(unsigned char r, unsigned char g, unsigned char b);
+	void clear(Color color);
 	void display() const;
 
 	void draw(const Shape &shape);
