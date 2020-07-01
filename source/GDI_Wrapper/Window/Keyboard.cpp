@@ -1,9 +1,12 @@
 #include <GDI_Wrapper/Window/Keyboard.hpp>
 
-Keyboard::Keyboard(HWND hWnd)
+namespace gw
 {
-}
+	Keyboard::Keyboard(HWND hWnd)
+	{
+	}
 
-Keyboard::~Keyboard()
-{
+	Keyboard::~Keyboard()
+	{
+	}
 }

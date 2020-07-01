@@ -6,26 +6,29 @@
 #include <vector>
 #include <memory>
 
-class GDIWRAPPER_API Graphics
+namespace gw
 {
-public:
-	Graphics(HWND hWnd);
-	~Graphics();
+	class GDIWRAPPER_API Graphics
+	{
+	public:
+		Graphics(HWND hWnd);
+		~Graphics();
 
-	Graphics(const Graphics&) = delete;
-	Graphics operator=(const Graphics&) = delete;
+		Graphics(const Graphics &) = delete;
+		Graphics operator=(const Graphics &) = delete;
 
-	void clear(COLORREF color);
-	void clear(Color color);
-	void display() const;
+		void clear(COLORREF color);
+		void clear(Color color);
+		void display() const;
 
-	void draw(const Shape &shape);
+		void draw(const Shape &shape);
 
-private:
-	HWND m_hWnd;
+	private:
+		HWND m_hWnd;
 
-	HDC m_backBuffer;
-	int m_savedDC;
-	HBITMAP m_hBmp, m_hBmpOld;
-	RECT m_clientRect;
-};
+		HDC m_backBuffer;
+		int m_savedDC;
+		HBITMAP m_hBmp, m_hBmpOld;
+		RECT m_clientRect;
+	};
+}

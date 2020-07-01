@@ -32,16 +32,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_ LPWSTR    lpCmdLine,
                      _In_ int       nCmdShow)
 {
-	Window someWindow;
+	gw::Window someWindow;
 
-	Graphics gfx(someWindow.getWindowHandle());
-	Clock clock;
-	Time dt;
+	gw::Graphics gfx(someWindow.getWindowHandle());
+	gw::Clock clock;
+	gw::Time dt;
 
-	std::vector<std::unique_ptr<Shape>> myShapes;
+	std::vector<std::unique_ptr<gw::Shape>> myShapes;
 
 	{
-		auto rect = std::make_unique<RectangleShape>(100, 100, 100, 100);
+		auto rect = std::make_unique<gw::RectangleShape>(100, 100, 100, 100);
 		rect->setFillColor({ 0, 255, 0 });
 		rect->setOutlineThickness(1);
 		rect->setOutlineColor({0, 0, 255});
@@ -49,14 +49,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		myShapes.push_back(std::move(rect));
 	}
 	{
-		auto rect = std::make_unique<RectangleShape>(200, 200, 200, 200);
+		auto rect = std::make_unique<gw::RectangleShape>(200, 200, 200, 200);
 		rect->setFillColor({ 255, 0, 0 });
 
 		myShapes.push_back(std::move(rect));
 	}
-	EllipseShape *myEllipse = nullptr;
+	gw::EllipseShape *myEllipse = nullptr;
 	{
-		auto ellipse = std::make_unique<EllipseShape>();
+		auto ellipse = std::make_unique<gw::EllipseShape>();
 
 		ellipse->setSize(200, 100);
 		ellipse->setPosition(500, 0);
@@ -68,7 +68,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		myShapes.push_back(std::move(ellipse));
 	}
 	{
-		auto circle = std::make_unique<CircleShape>();
+		auto circle = std::make_unique<gw::CircleShape>();
 		circle->setPosition(650, 0);
 		circle->setRadius(33.33);
 		circle->setFillColor({ 0, 255, 255 });
