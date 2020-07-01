@@ -1,4 +1,4 @@
-#include <Wrapper/Graphics/Shapes/EllipseShape.hpp>
+#include <GDI_Wrapper/Graphics/Shapes/EllipseShape.hpp>
 
 EllipseShape::EllipseShape()
 	:

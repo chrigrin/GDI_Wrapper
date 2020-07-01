@@ -8,7 +8,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WrapperTester", "WrapperTes
 		{2E039B04-A953-4C31-9E0F-FEAC34A7F703} = {2E039B04-A953-4C31-9E0F-FEAC34A7F703}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GDI-Wrapper", "GDI-Wrapper\GDI-Wrapper.vcxproj", "{2E039B04-A953-4C31-9E0F-FEAC34A7F703}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GDI_Wrapper", "GDI_Wrapper\GDI_Wrapper.vcxproj", "{2E039B04-A953-4C31-9E0F-FEAC34A7F703}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

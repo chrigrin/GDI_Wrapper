@@ -1,4 +1,4 @@
-#include <Wrapper/Graphics/Shapes/CircleShape.hpp>
+#include <GDI_Wrapper/Graphics/Shapes/CircleShape.hpp>
 
 CircleShape::CircleShape()
 	:

@@ -1,5 +1,5 @@
 #include "framework.h"
-#include "Wrapper/Graphics/Color.hpp"
+#include "GDI_Wrapper/Graphics/Color.hpp"
 
 Color::Color()
 	:

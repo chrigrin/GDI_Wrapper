@@ -1,5 +1,5 @@
 #pragma once
-#include <Wrapper/Export/Export.hpp>
+#include <GDI_Wrapper/Export/Export.hpp>
 #include <chrono>
 
 template class GDIWRAPPER_API std::chrono::duration<__int64, std::nano>;
@@ -11,8 +11,8 @@ public:
 	Clock();
 	~Clock();
 
-	double restart();
-	double getElapsedTime();
+	std::chrono::duration<__int64, std::nano> restart();
+	std::chrono::duration<__int64, std::nano> getElapsedTime();
 
 private:
 	std::chrono::steady_clock::time_point m_last;

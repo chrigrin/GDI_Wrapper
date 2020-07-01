@@ -1,4 +1,4 @@
-#include <Wrapper/Graphics/Shapes/RectangleShape.hpp>
+#include <GDI_Wrapper/Graphics/Shapes/RectangleShape.hpp>
 
 RectangleShape::RectangleShape()
 	:

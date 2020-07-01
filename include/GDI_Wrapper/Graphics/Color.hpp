@@ -1,5 +1,5 @@
 #pragma once
-#include <Wrapper/Export/Export.hpp>
+#include <GDI_Wrapper/Export/Export.hpp>
 
 class GDIWRAPPER_API Color
 {

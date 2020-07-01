@@ -36,7 +36,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	Graphics gfx(someWindow.getWindowHandle());
 	Clock clock;
-	double dt;
+	Time dt;
 
 	std::vector<std::unique_ptr<Shape>> myShapes;
 
@@ -96,7 +96,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		myEllipse->move(1, 1);
 
-		std::wstring wstr = std::to_wstring(dt);
+		std::wstring wstr = std::to_wstring(dt.asNanoseconds());
 		SetWindowText(someWindow.getWindowHandle(), wstr.c_str());
 		//rect.move(1, 0);
 		//ellipse.move(0, 1);

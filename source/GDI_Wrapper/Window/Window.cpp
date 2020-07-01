@@ -1,4 +1,4 @@
-#include <Wrapper/Window/Window.hpp>
+#include <GDI_Wrapper/Window/Window.hpp>
 
 // Initialize the windowclass at compile time to make the compiler happy
 Window::WindowClass Window::WindowClass::wndClass;

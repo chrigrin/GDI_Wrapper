@@ -36,67 +36,73 @@
     <ClInclude Include="framework.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Wrapper\Graphics\Shapes\Shape.hpp">
+    <ClInclude Include="..\include\GDI_Wrapper\Graphics\Shapes\Shape.hpp">
       <Filter>Graphics\Shapes</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Wrapper\Graphics\Shapes\CircleShape.hpp">
+    <ClInclude Include="..\include\GDI_Wrapper\Graphics\Shapes\CircleShape.hpp">
       <Filter>Graphics\Shapes</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Wrapper\Graphics\Shapes\EllipseShape.hpp">
+    <ClInclude Include="..\include\GDI_Wrapper\Graphics\Shapes\EllipseShape.hpp">
       <Filter>Graphics\Shapes</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Wrapper\Graphics\Shapes\RectangleShape.hpp">
+    <ClInclude Include="..\include\GDI_Wrapper\Graphics\Shapes\RectangleShape.hpp">
       <Filter>Graphics\Shapes</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Wrapper\Graphics\Graphics.hpp">
+    <ClInclude Include="..\include\GDI_Wrapper\Graphics\Graphics.hpp">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Wrapper\Export\Export.hpp">
+    <ClInclude Include="..\include\GDI_Wrapper\Export\Export.hpp">
       <Filter>Export</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Wrapper\System\Clock.hpp">
+    <ClInclude Include="..\include\GDI_Wrapper\System\Clock.hpp">
       <Filter>System</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Wrapper\Window\Keyboard.hpp">
+    <ClInclude Include="..\include\GDI_Wrapper\Window\Keyboard.hpp">
       <Filter>Window</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Wrapper\Window\Window.hpp">
+    <ClInclude Include="..\include\GDI_Wrapper\Window\Window.hpp">
       <Filter>Window</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Wrapper\Link.hpp">
+    <ClInclude Include="..\include\GDI_Wrapper\Link.hpp">
       <Filter>Link Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Wrapper\Graphics\Color.hpp">
+    <ClInclude Include="..\include\GDI_Wrapper\Graphics\Color.hpp">
       <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\GDI_Wrapper\System\Time.hpp">
+      <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\Wrapper\Graphics\Shapes\CircleShape.cpp">
+    <ClCompile Include="..\source\GDI_Wrapper\Graphics\Shapes\CircleShape.cpp">
       <Filter>Graphics\Shapes</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\Wrapper\Graphics\Shapes\EllipseShape.cpp">
+    <ClCompile Include="..\source\GDI_Wrapper\Graphics\Shapes\EllipseShape.cpp">
       <Filter>Graphics\Shapes</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\Wrapper\Graphics\Shapes\RectangleShape.cpp">
+    <ClCompile Include="..\source\GDI_Wrapper\Graphics\Shapes\RectangleShape.cpp">
       <Filter>Graphics\Shapes</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\Wrapper\System\Clock.cpp">
+    <ClCompile Include="..\source\GDI_Wrapper\System\Clock.cpp">
       <Filter>System</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\Wrapper\Window\Window.cpp">
+    <ClCompile Include="..\source\GDI_Wrapper\Window\Window.cpp">
       <Filter>Window</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\Wrapper\Window\Keyboard.cpp">
+    <ClCompile Include="..\source\GDI_Wrapper\Window\Keyboard.cpp">
       <Filter>Window</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\Wrapper\Graphics\Graphics.cpp">
+    <ClCompile Include="..\source\GDI_Wrapper\Graphics\Graphics.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\Wrapper\Graphics\Color.cpp">
+    <ClCompile Include="..\source\GDI_Wrapper\Graphics\Color.cpp">
       <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\GDI_Wrapper\System\Time.cpp">
+      <Filter>System</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

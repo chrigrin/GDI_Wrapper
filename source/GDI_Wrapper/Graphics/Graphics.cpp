@@ -1,4 +1,4 @@
-#include <Wrapper/Graphics/Graphics.hpp>
+#include <GDI_Wrapper/Graphics/Graphics.hpp>
 
 Graphics::Graphics(HWND hWnd)
 	:

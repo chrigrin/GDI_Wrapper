@@ -16,6 +16,6 @@
 #include <assert.h>
 
 // Include the linker header
-#include "Wrapper/Link.hpp"
+#include "GDI_Wrapper/Link.hpp"
 
 // reference additional headers your program requires here
