@@ -1,6 +1,7 @@
 #pragma once
 #include "../GDI_Wrapper/framework.h"
 #include <GDI_Wrapper/Export/Export.hpp>
+#include <string>
 
 namespace gw
 {
@@ -25,6 +26,9 @@ namespace gw
 		};
 	public:
 		Window();
+		Window(const std::wstring &name);
+		Window(double width, double height);
+		Window(const std::wstring &name, double width, double height);
 		~Window();
 
 		HWND getWindowHandle() const;

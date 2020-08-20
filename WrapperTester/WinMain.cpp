@@ -32,16 +32,17 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_ LPWSTR    lpCmdLine,
                      _In_ int       nCmdShow)
 {
-	gw::Window someWindow;
+	gw::Window someWindow(1000, 900);
 
 	gw::Graphics gfx(someWindow.getWindowHandle());
 	gw::Clock clock;
 	gw::Time dt;
 
+
 	std::vector<std::unique_ptr<gw::Shape>> myShapes;
 
 	{
-		auto rect = std::make_unique<gw::RectangleShape>(100, 100, 100, 100);
+		auto rect = std::make_unique<gw::RectangleShape>(0, 0, 100, 900);
 		rect->setFillColor({ 0, 255, 0 });
 		rect->setOutlineThickness(1);
 		rect->setOutlineColor({0, 0, 255});
@@ -97,7 +98,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		myEllipse->move(1, 1);
 
 		std::wstring wstr = std::to_wstring(dt.asNanoseconds());
-		SetWindowText(someWindow.getWindowHandle(), wstr.c_str());
+		//SetWindowTextW(someWindow.getWindowHandle(), wstr.c_str());
 		//rect.move(1, 0);
 		//ellipse.move(0, 1);
     }
