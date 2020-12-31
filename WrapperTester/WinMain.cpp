@@ -32,7 +32,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_ LPWSTR    lpCmdLine,
                      _In_ int       nCmdShow)
 {
-	gw::Window someWindow(1000, 900);
+	gw::Window someWindow;
 
 	gw::Graphics gfx(someWindow.getWindowHandle());
 	gw::Clock clock;

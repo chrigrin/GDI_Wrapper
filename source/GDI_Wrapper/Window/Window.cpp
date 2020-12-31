@@ -73,7 +73,8 @@ namespace gw
 		desiredRect.right = width;
 		desiredRect.bottom = height;
 
-		AdjustWindowRect(&desiredRect, WS_CAPTION, FALSE);
+		if (width != CW_USEDEFAULT)
+			AdjustWindowRect(&desiredRect, WS_CAPTION, FALSE);
 
 		// Create a window and store a pointer to this class in the lpParam
 		m_hWnd = CreateWindowW(WindowClass::getName(), name.c_str(), WS_MINIMIZEBOX | WS_SYSMENU,
@@ -85,10 +86,11 @@ namespace gw
 
 		GetMessageW(&m_msg, nullptr, 0, 0);
 
-		RECT rect, windowRect;
+		// Debugging code
+		/*RECT rect, windowRect;
 		GetWindowRect(m_hWnd, &windowRect);
 		GetClientRect(m_hWnd, &rect);
-		SetWindowTextW(m_hWnd, std::to_wstring(rect.bottom - rect.top).c_str());
+		SetWindowTextW(m_hWnd, std::to_wstring(rect.bottom - rect.top).c_str());*/
 	}
 
 	Window::~Window()
