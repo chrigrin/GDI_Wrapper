@@ -8,6 +8,12 @@ namespace gw
 	{
 	}
 
+	Time::Time(int milli)
+		:
+		m_nanoseconds(milli * 1'000'000)
+	{
+	}
+
 	Time::~Time()
 	{
 	}
@@ -18,14 +24,44 @@ namespace gw
 		return *this;
 	}
 
+	bool Time::operator<(const Time &other) const
+	{
+		return m_nanoseconds < other.m_nanoseconds;
+	}
+
+	bool Time::operator>(const Time &other) const
+	{
+		return m_nanoseconds > other.m_nanoseconds;
+	}
+
+	__int64 Time::operator+(const Time &other) const
+	{
+		return m_nanoseconds + other.m_nanoseconds;
+	}
+
+	__int64 Time::operator-(const Time &other) const
+	{
+		return m_nanoseconds - other.m_nanoseconds;
+	}
+
+	__int64 &Time::operator+=(const Time& other)
+	{
+		return m_nanoseconds += other.m_nanoseconds;
+	}
+
+	__int64 &Time::operator-=(const Time& other)
+	{
+		return m_nanoseconds -= other.m_nanoseconds;
+	}
+
 	double Time::asSeconds()
 	{
 		return static_cast<double>(m_nanoseconds / 1'000'000'000);
 	}
 
-	double Time::asMilliseconds()
+	__int64 Time::asMilliseconds()
 	{
-		return static_cast<double>(m_nanoseconds / 1'000'000);
+		return static_cast<__int64>(m_nanoseconds / 1'000'000);
 	}
 
 	__int64 Time::asMicroseconds()

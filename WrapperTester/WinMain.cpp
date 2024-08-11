@@ -5,6 +5,7 @@
 #include <sstream>
 #include <vector>
 #include <algorithm>
+#include "Snake.hpp"
 
 namespace {
 
@@ -38,46 +39,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	gw::Clock clock;
 	gw::Time dt;
 
-
-	std::vector<std::unique_ptr<gw::Shape>> myShapes;
-
-	{
-		auto rect = std::make_unique<gw::RectangleShape>(0, 0, 100, 900);
-		rect->setFillColor({ 0, 255, 0 });
-		rect->setOutlineThickness(1);
-		rect->setOutlineColor({0, 0, 255});
-		
-		myShapes.push_back(std::move(rect));
-	}
-	{
-		auto rect = std::make_unique<gw::RectangleShape>(200, 200, 200, 200);
-		rect->setFillColor({ 255, 0, 0 });
-
-		myShapes.push_back(std::move(rect));
-	}
-	gw::EllipseShape *myEllipse = nullptr;
-	{
-		auto ellipse = std::make_unique<gw::EllipseShape>();
-
-		ellipse->setSize(200, 100);
-		ellipse->setPosition(500, 0);
-		ellipse->setFillColor({ 0, 255, 255 });
-		ellipse->setOutlineColor({ 255, 255, 0 });
-		ellipse->setOutlineThickness(3);
-
-		myEllipse = ellipse.get();
-		myShapes.push_back(std::move(ellipse));
-	}
-	{
-		auto circle = std::make_unique<gw::CircleShape>();
-		circle->setPosition(650, 0);
-		circle->setRadius(33.33);
-		circle->setFillColor({ 0, 255, 255 });
-		circle->setOutlineColor({255, 255, 0});
-		circle->setOutlineThickness(1);
-
-		myShapes.push_back(std::move(circle));
-	}
+	Snake snake;
 
     // Main message loop:
     while (someWindow.isOpen())
@@ -86,18 +48,22 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		dt = clock.getElapsedTime();
 
+		///////////////////////////////
+		// Update loop here
+		// 
+		
+		snake.update(dt);
+
+		///////////////////////////////
+
 		gfx.clear({ 0, 0, 0 });
 
-		for (auto &shape : myShapes)
-		{
-			gfx.draw((*shape.get()));
-		}
+		// Draw here
+		snake.draw(gfx);
 
 		gfx.display();
 
-		myEllipse->move(1, 1);
-
-		std::wstring wstr = std::to_wstring(dt.asNanoseconds());
+		//std::wstring wstr = std::to_wstring(dt.asNanoseconds());
 		//SetWindowTextW(someWindow.getWindowHandle(), wstr.c_str());
 		//rect.move(1, 0);
 		//ellipse.move(0, 1);
